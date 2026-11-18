@@ -1,0 +1,236 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+/* Lenis base styles (html height, stopped state, nested-scroll overscroll). Smooth scrolling only, no effects. */
+@import "lenis/dist/lenis.css";
+
+/* Dark mode is class-based (not enabled yet) so OS dark settings never restyle the light design. */
+@custom-variant dark (&:is(.dark *));
+/* Services hero "scene" layout: wide enough, and landscape enough, for the four-corner composition around the image. */
+@custom-variant scene (@media (width >= 64rem) and (min-aspect-ratio: 11/10));
+
+/*
+ * BOOK STREAM — design tokens
+ * Theme palette (strict, 2026-11-13): White #FFFFFF · Black #111820 · Brand Blue #1559A8.
+ * Surfaces are white; text is black (with opacity for hierarchy); blue is for
+ * buttons, links, icons and accents. Hairline borders are black at low opacity.
+ * mist/cloud remain only for the not-yet-refreshed inner pages; the homepage,
+ * header and footer must not use them.
+ */
+
+@theme inline {
+  /* Brand */
+  --color-brand: #1559a8;
+  --color-brand-strong: color-mix(in srgb, #1559a8 80%, #111820);
+  --color-brand-soft: color-mix(in srgb, #1559a8 55%, #ffffff);
+  --color-ink: #111820;
+  --color-mist: #eaf2fa;
+  --color-cloud: #f5f6f8;
+
+  /* shadcn semantic tokens */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-serif: var(--font-source-serif), ui-serif, Georgia, serif;
+  --font-heading: var(--font-serif);
+
+  /* Radius — deliberately restrained for a corporate feel */
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 3);
+  --radius-4xl: calc(var(--radius) * 4);
+
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #111820;
+  --card: #ffffff;
+  --card-foreground: #111820;
+  --popover: #ffffff;
+  --popover-foreground: #111820;
+  --primary: #1559a8;
+  --primary-foreground: #ffffff;
+  --secondary: #ffffff;
+  --secondary-foreground: #111820;
+  --muted: #ffffff;
+  --muted-foreground: rgb(17 24 32 / 0.66);
+  --accent: #ffffff;
+  --accent-foreground: #111820;
+  /* Validation messaging uses the brand ink rather than introducing a red. */
+  --destructive: #111820;
+  --border: rgb(17 24 32 / 0.11);
+  --input: rgb(17 24 32 / 0.18);
+  --ring: #1559a8;
+  --radius: 0.375rem;
+}
+
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 82rem;
+  padding-inline: 1.25rem;
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/*
+ * Homepage hero: dissolves the photo's edges into the hero background (sampled from the photo's near-black edges)
+ * so the image and section read as one scene. Each gradient fades one side; intersecting them keeps the centre
+ * (the open book and the small figure) fully opaque. Masks only, the photo's colours are untouched.
+ */
+@layer components {
+  .hero-scene-mask {
+    --fade-l: 12%;
+    --fade-r: 10%;
+    --fade-t: 14%;
+    --fade-b: 5%;
+    mask-image:
+      linear-gradient(to right, transparent, #000 var(--fade-l)),
+      linear-gradient(to left, transparent, #000 var(--fade-r)),
+      linear-gradient(to bottom, transparent, #000 var(--fade-t)),
+      linear-gradient(to top, transparent, #000 var(--fade-b));
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+    @media (width >= 64rem) {
+      --fade-l: 24%;
+      --fade-r: 8%;
+      --fade-t: 12%;
+    }
+  }
+}
+
+/*
+ * Services hero (src/components/services/services-hero.tsx): the section background is sampled from the artwork
+ * itself (src/assets/services/services-hero-light-path.webp), so the image needs almost no edge treatment.
+ * The artwork's navy is a vertical gradient that is slightly lighter on its right edge (glow from the beam), so in the
+ * four-corner layout the left and right halves of the section carry the left- and right-edge colours; the image always
+ * spans the full section height and hides the join. Stacked layouts (phones, portrait tablets) use one averaged
+ * gradient.
+ */
+@layer components {
+  .services-scene {
+    background: linear-gradient(to bottom, #0f3248, #0d263a 55%, #0a1c2c);
+    @media (width >= 64rem) and (min-aspect-ratio: 11/10) {
+      background:
+        linear-gradient(to bottom, #11354d, #0f3248 10%, #0f2e43 20%, #0e2d41 30%, #0f2a3f 40%, #0d263a 50%, #0c2335 60%, #0d2031 70%, #0b1e2f 80%, #0a1b2b 90%, #081827) left / 50.5% 100% no-repeat,
+        linear-gradient(to bottom, #113a55, #0f3852 30%, #0e3650 40%, #0f344e 50%, #0f2f46 60%, #0e2a40 70%, #0d263a 80%, #0c2134 90%, #0a1b2d) right / 50% 100% no-repeat;
+    }
+  }
+  /*
+   * Stacked layout only: a full-width band behind the image, exactly as tall as the image, carrying the same
+   * left/right edge colours as the scene layout, so the image's sides meet matching colour. Only the band (never the
+   * image) fades into the section above and below it.
+   */
+  .services-hero-band {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(to bottom, #11354d, #0f3248 10%, #0f2e43 20%, #0e2d41 30%, #0f2a3f 40%, #0d263a 50%, #0c2335 60%, #0d2031 70%, #0b1e2f 80%, #0a1b2b 90%, #081827) left / 50.5% 100% no-repeat,
+        linear-gradient(to bottom, #113a55, #0f3852 30%, #0e3650 40%, #0f344e 50%, #0f2f46 60%, #0e2a40 70%, #0d263a 80%, #0c2134 90%, #0a1b2d) right / 50% 100% no-repeat;
+      mask-image: linear-gradient(to bottom, transparent, #000 4%, #000 94%, transparent);
+    }
+    @media (width >= 64rem) and (min-aspect-ratio: 11/10) {
+      &::before {
+        content: none;
+      }
+    }
+  }
+  /*
+   * Minimal edge treatment, only on edges with nothing important on them: the right edge, where the beam exits, and
+   * in the stacked layout also the top (beam) and the plain navy bottom, where the colour band fades out. Elsewhere
+   * the image's edges already match the colour behind them.
+   */
+  .services-hero-edge {
+    mask-image:
+      linear-gradient(to bottom, transparent, #000 4%),
+      linear-gradient(to top, transparent, #000 6%),
+      linear-gradient(to left, transparent, #000 5%);
+    mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+    @media (width >= 64rem) and (min-aspect-ratio: 11/10) {
+      mask-image: linear-gradient(to left, transparent, #000 4%);
+    }
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1rem;
+  text-transform: uppercase;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-tap-highlight-color: transparent;
+    /*
+     * Anchor targets land below the sticky header (4.5rem, 5rem from lg) with a little breathing room. Used by native
+     * hash jumps and by Lenis's scrollTo (src/components/providers/smooth-scroll.tsx), which reads this value.
+     */
+    scroll-padding-top: 5.5rem;
+    @media (width >= 64rem) {
+      scroll-padding-top: 6.5rem;
+    }
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  /* Static design: no CSS animations or transitions anywhere (menus and sheets open instantly). */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  ::selection {
+    background: #1559a8;
+    color: #ffffff;
+  }
+}

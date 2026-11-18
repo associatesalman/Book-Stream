@@ -1,0 +1,937 @@
+/**
+ * Audiobooks added from public/Book 1.docx, public/Book 11.docx and public/Book 12.docx.
+ *
+ * Generated from the documents. Each record keeps one source entry together (embedded cover
+ * image, destination URL and entry position), so a cover is never paired with another book's
+ * title or link. Titles and authors are transcribed from the cover artwork; category and
+ * subgenre come only from cover text and the listing URL's keywords, and "general" marks
+ * titles whose genre the source does not state. Descriptions restate cover or series text;
+ * no plot details are invented.
+ *
+ * Book 1.docx entry 11 (The Practical Pretender) has the same listing ID as https.docx
+ * entry 10, so it is merged into the existing record in books.ts rather than repeated here.
+ */
+
+import type { StaticImageData } from "next/image";
+
+import type { BookCategory } from "@/content/books";
+
+import cover_pride_and_prejudice from "@/assets/covers/pride-and-prejudice.jpg";
+import cover_torin from "@/assets/covers/torin.jpg";
+import cover_the_crime_at_black_dudley from "@/assets/covers/the-crime-at-black-dudley.webp";
+import cover_the_valley_of_lost_children from "@/assets/covers/the-valley-of-lost-children.jpg";
+import cover_frontier_mail_order_brides from "@/assets/covers/frontier-mail-order-brides.jpg";
+import cover_caroline_bingleys_grand_plan from "@/assets/covers/caroline-bingleys-grand-plan.webp";
+import cover_crime_and_punishment from "@/assets/covers/crime-and-punishment.jpg";
+import cover_vintage_vine from "@/assets/covers/vintage-vine.webp";
+import cover_once_bitten from "@/assets/covers/once-bitten.webp";
+import cover_the_brothers_karamazov from "@/assets/covers/the-brothers-karamazov.jpg";
+import cover_the_fare from "@/assets/covers/the-fare.jpg";
+import cover_secrets_and_scallywags from "@/assets/covers/secrets-and-scallywags.webp";
+import cover_the_divine_comedy from "@/assets/covers/the-divine-comedy.jpg";
+import cover_her_sizzling_billionaire from "@/assets/covers/her-sizzling-billionaire.jpg";
+import cover_wuthering_heights from "@/assets/covers/wuthering-heights.webp";
+import cover_he_sent_me_the_wrong_text from "@/assets/covers/he-sent-me-the-wrong-text.jpg";
+import cover_my_billionaire_husband_signed_our_divorce from "@/assets/covers/my-billionaire-husband-signed-our-divorce.jpg";
+import cover_the_blacksmith from "@/assets/covers/the-blacksmith.jpg";
+import cover_pregnant_by_the_contract from "@/assets/covers/pregnant-by-the-contract.jpg";
+import cover_leave_it_to_psmith from "@/assets/covers/leave-it-to-psmith.webp";
+import cover_zombie_virus_lyrv_27_hope from "@/assets/covers/zombie-virus-lyrv-27-hope.jpg";
+import cover_obeying_mr_kingsley from "@/assets/covers/obeying-mr-kingsley.jpg";
+import cover_elizabeth_proposes from "@/assets/covers/elizabeth-proposes.webp";
+import cover_life_goes_on from "@/assets/covers/life-goes-on.webp";
+import cover_the_billionaires_cupcake from "@/assets/covers/the-billionaires-cupcake.jpg";
+import cover_noise_upstairs from "@/assets/covers/noise-upstairs.jpg";
+import cover_shot_through_the_heart from "@/assets/covers/shot-through-the-heart.jpg";
+import cover_fortuitous_encounters from "@/assets/covers/fortuitous-encounters.jpg";
+import cover_fall_for_murder from "@/assets/covers/fall-for-murder.jpg";
+import cover_heavens_fall from "@/assets/covers/heavens-fall.jpg";
+import cover_ruined_by_her_billionaire_husband from "@/assets/covers/ruined-by-her-billionaire-husband.jpg";
+import cover_newlywed_marriage_in_crisis from "@/assets/covers/newlywed-marriage-in-crisis.jpg";
+import cover_murder_in_the_summer_house from "@/assets/covers/murder-in-the-summer-house.jpg";
+import cover_christmas_in_tennessee from "@/assets/covers/christmas-in-tennessee.jpg";
+import cover_to_heir_is_human from "@/assets/covers/to-heir-is-human.jpg";
+import cover_roses_from_pemberley from "@/assets/covers/roses-from-pemberley.jpg";
+import cover_the_detour from "@/assets/covers/the-detour.jpg";
+import cover_stolen_and_bred_by_the_bratva from "@/assets/covers/stolen-and-bred-by-the-bratva.jpg";
+import cover_he_rejected_me_for_my_twin_sister from "@/assets/covers/he-rejected-me-for-my-twin-sister.jpg";
+import cover_aliens_chosen_mate from "@/assets/covers/aliens-chosen-mate.jpg";
+import cover_vipers_desire from "@/assets/covers/vipers-desire.jpg";
+import cover_the_grandfather from "@/assets/covers/the-grandfather.jpg";
+import cover_my_secret_crush from "@/assets/covers/my-secret-crush.jpg";
+import cover_the_house_key_he_gave_my_best_friend from "@/assets/covers/the-house-key-he-gave-my-best-friend.jpg";
+import cover_maid_of_dishonor from "@/assets/covers/maid-of-dishonor.jpg";
+import cover_my_husband_cheated_with_the_nanny from "@/assets/covers/my-husband-cheated-with-the-nanny.jpg";
+import cover_scott_jackson from "@/assets/covers/scott-jackson.webp";
+import cover_the_duke_of_frost from "@/assets/covers/the-duke-of-frost.jpg";
+import cover_unexpected_ascension from "@/assets/covers/unexpected-ascension.webp";
+import cover_murder_most_vile_volume_50 from "@/assets/covers/murder-most-vile-volume-50.jpg";
+import cover_elizabeths_acquaintance from "@/assets/covers/elizabeths-acquaintance.webp";
+import cover_unexpected_attraction from "@/assets/covers/unexpected-attraction.webp";
+import cover_my_husband_cheats_with_my_best_friend from "@/assets/covers/my-husband-cheats-with-my-best-friend.jpg";
+import cover_mine_mine_mine from "@/assets/covers/mine-mine-mine.jpg";
+import cover_not_my_undergarment from "@/assets/covers/not-my-undergarment.jpg";
+import cover_an_unexpected_family from "@/assets/covers/an-unexpected-family.jpg";
+import cover_moms_boyfriend from "@/assets/covers/moms-boyfriend.jpg";
+import cover_the_birthday_trip_for_two from "@/assets/covers/the-birthday-trip-for-two.webp";
+import cover_blueberries_and_betrayal from "@/assets/covers/blueberries-and-betrayal.webp";
+import cover_weekend_of_passion from "@/assets/covers/weekend-of-passion.webp";
+import cover_secret_exploration from "@/assets/covers/secret-exploration.jpg";
+import cover_death_and_sweets from "@/assets/covers/death-and-sweets.webp";
+import cover_unthinkable from "@/assets/covers/unthinkable.webp";
+import cover_a_season_of_love from "@/assets/covers/a-season-of-love.webp";
+import cover_in_rotation from "@/assets/covers/in-rotation.webp";
+import cover_guarding_the_rock_star from "@/assets/covers/guarding-the-rock-star.jpg";
+import cover_behind_closed_doors from "@/assets/covers/behind-closed-doors.webp";
+import cover_the_devon_murders from "@/assets/covers/the-devon-murders.jpg";
+import cover_a_saint_of_longbourn from "@/assets/covers/a-saint-of-longbourn.webp";
+import cover_accidental_baby_for_the_billionaire from "@/assets/covers/accidental-baby-for-the-billionaire.jpg";
+import cover_mail_order_blessing from "@/assets/covers/mail-order-blessing.jpg";
+import cover_elogio_da_loucura from "@/assets/covers/elogio-da-loucura.jpg";
+import cover_pack_position from "@/assets/covers/pack-position.webp";
+import cover_his_curvy_christmas_treat from "@/assets/covers/his-curvy-christmas-treat.webp";
+import cover_fake_dating_my_baby_daddy from "@/assets/covers/fake-dating-my-baby-daddy.webp";
+import cover_breakaway from "@/assets/covers/breakaway.webp";
+
+export type ExtraBook = {
+  source: { document: string; entry: number };
+  slug: string;
+  title: string;
+  author: string;
+  category: BookCategory;
+  subgenre?: string;
+  description: string;
+  cover: StaticImageData;
+  /** Destination URL exactly as supplied in the source document. */
+  href: string;
+};
+
+export const extraBooks: ExtraBook[] = [
+  {
+    source: { document: "Book 1.docx", entry: 1 },
+    slug: "pride-and-prejudice",
+    title: "Pride and Prejudice",
+    author: "Jane Austen",
+    category: "classics",
+    subgenre: "Classic novel",
+    description: "Jane Austen’s classic novel, narrated by Alex Mercer.",
+    cover: cover_pride_and_prejudice,
+    href: "https://www.amazon.com/Audible-Pride-and-Prejudice/dp/B0HPJBSXBL/ref=sr_1_14?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.4LP3IKxkR_CEkH5apd1wiEVLPSEr8PN_BBz5EwcDH0N-yW8xR7yYaUtyJxziNSYlsR-aFRDsXBIp37kBzbW7-eCLWxSk8wVwUPMfUQ76hLsnYv_gw7cuuoipfddkigsA9E1aq0U6nyWrCkTP7M25Uk0PGxIW4KFZZrGi5l-1BDyixINehuDrz2aQuJ0c8Tmn6RV_IVH6jc08dI-u5rhPARLvPlE--xok4mLMdljdWPI.wSUj11uofOdmAZLYmPrPNFXlnaUYzglf_N2d9NVzKxU&dib_tag=se&keywords=independent+published+audio+book&qid=1794443649&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-14",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 2 },
+    slug: "torin",
+    title: "Torin",
+    author: "Ariana Hawkes",
+    category: "romance",
+    subgenre: "Shifter romance",
+    description: "A grizzly shifter alpha romance from the Feral Mountain Bears series.",
+    cover: cover_torin,
+    href: "https://www.amazon.com/Torin-Grizzly-Shifter-Alpha-Romance/dp/B0HL7N6VRB/ref=sr_1_15?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.4LP3IKxkR_CEkH5apd1wiEVLPSEr8PN_BBz5EwcDH0N-yW8xR7yYaUtyJxziNSYlsR-aFRDsXBIp37kBzbW7-eCLWxSk8wVwUPMfUQ76hLsnYv_gw7cuuoipfddkigsA9E1aq0U6nyWrCkTP7M25Uk0PGxIW4KFZZrGi5l-1BDyixINehuDrz2aQuJ0c8Tmn6RV_IVH6jc08dI-u5rhPARLvPlE--xok4mLMdljdWPI.wSUj11uofOdmAZLYmPrPNFXlnaUYzglf_N2d9NVzKxU&dib_tag=se&keywords=independent+published+audio+book&qid=1794443649&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-15",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 3 },
+    slug: "the-crime-at-black-dudley",
+    title: "The Crime at Black Dudley",
+    author: "Margery Allingham",
+    category: "mystery",
+    subgenre: "Classic crime",
+    description: "A classic crime novel by Margery Allingham.",
+    cover: cover_the_crime_at_black_dudley,
+    href: "https://www.amazon.com/The-Crime-at-Black-Dudley/dp/B0HLPT6BV2/ref=sr_1_17?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.3EwqsYLqAQVdpHvAmz53K_R5wksH4aQm6BGrobe6Um_8wHwakmYiNB8bCOzjEAbi-F_IzNzPuxXvtNAs-q1LpA.3cJuISCTPTjrG4-LXhzJ24TVOAjH-_hwGvVzaxqtX9Y&dib_tag=se&keywords=independent+published+audio+book&qid=1794443849&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-17&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 4 },
+    slug: "the-valley-of-lost-children",
+    title: "The Valley of Lost Children",
+    author: "David Barbur",
+    category: "mystery",
+    subgenre: "Wilderness mystery",
+    description: "Book one of the Tye Caine Wilderness Mystery series.",
+    cover: cover_the_valley_of_lost_children,
+    href: "https://www.amazon.com/Valley-Lost-Children-Wilderness-Mystery/dp/B0CZF5T9KY/ref=sr_1_19?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.3EwqsYLqAQVdpHvAmz53K_R5wksH4aQm6BGrobe6Um_8wHwakmYiNB8bCOzjEAbiHOFUgsDG5e07lRCRp61QOgiLh87p07NbjjYHlTU57VIMHjGSdHUynxW9nZU6Saxkli06e_pBnZio6N6eDEdCMcZN_VfmEVflsHd1towf8kYHl2L1GbM3prEgpl6k5PZMRkq9xAWuCPGxQsU8YkGKBAhVx7Q3wNQufOFLhiqTBxY.IGFLEEhz-aLuTQR5Jt6He07ZgfRUGSlUE1H6io8oYhE&dib_tag=se&keywords=independent+published+audio+book&qid=1794443872&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-19&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 5 },
+    slug: "frontier-mail-order-brides",
+    title: "Frontier Mail-Order Brides",
+    author: "Faith Reynolds & Gretchen Wheeler",
+    category: "fiction",
+    subgenre: "Frontier stories",
+    description: "A 20-book box set of frontier mail-order bride stories.",
+    cover: cover_frontier_mail_order_brides,
+    href: "https://www.amazon.com/Frontier-Mail-Order-Brides-Book-Box/dp/B0HN3DSBVK/ref=sr_1_22?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.3EwqsYLqAQVdpHvAmz53K_R5wksH4aQm6BGrobe6Um_8wHwakmYiNB8bCOzjEAbiHOFUgsDG5e07lRCRp61QOgiLh87p07NbjjYHlTU57VIMHjGSdHUynxW9nZU6Saxkli06e_pBnZio6N6eDEdCMcZN_VfmEVflsHd1towf8kYHl2L1GbM3prEgpl6k5PZMRkq9xAWuCPGxQsU8YkGKBAhVx7Q3wNQufOFLhiqTBxY.IGFLEEhz-aLuTQR5Jt6He07ZgfRUGSlUE1H6io8oYhE&dib_tag=se&keywords=independent+published+audio+book&qid=1794443890&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-22&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 6 },
+    slug: "caroline-bingleys-grand-plan",
+    title: "Caroline Bingley’s Grand Plan",
+    author: "Kitty Wren",
+    category: "fiction",
+    subgenre: "Pride and Prejudice variation",
+    description: "A Pride and Prejudice variation, narrated by Clare Saxby.",
+    cover: cover_caroline_bingleys_grand_plan,
+    href: "https://www.amazon.com/Caroline-Bingleys-Grand-Plan-Prejudice/dp/B0HM6SDW48/ref=sr_1_24?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.3EwqsYLqAQVdpHvAmz53K_R5wksH4aQm6BGrobe6Um_8wHwakmYiNB8bCOzjEAbiHOFUgsDG5e07lRCRp61QOgiLh87p07NbjjYHlTU57VIMHjGSdHUynxW9nZU6Saxkli06e_pBnZio6N6eDEdCMcZN_VfmEVflsHd1towf8kYHl2L1GbM3prEgpl6k5PZMRkq9xAWuCPGxQsU8YkGKBAhVx7Q3wNQufOFLhiqTBxY.IGFLEEhz-aLuTQR5Jt6He07ZgfRUGSlUE1H6io8oYhE&dib_tag=se&keywords=independent+published+audio+book&qid=1794443890&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-24&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 7 },
+    slug: "crime-and-punishment",
+    title: "Crime and Punishment",
+    author: "Fyodor Dostoevsky",
+    category: "classics",
+    subgenre: "Classic novel",
+    description: "Fyodor Dostoevsky’s classic novel, in audio.",
+    cover: cover_crime_and_punishment,
+    href: "https://www.amazon.com/Audible-Crime-and-Punishment/dp/B0HQSQ7KN8/ref=sr_1_26?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.3EwqsYLqAQVdpHvAmz53K_R5wksH4aQm6BGrobe6Um_8wHwakmYiNB8bCOzjEAbiHOFUgsDG5e07lRCRp61QOgiLh87p07NbjjYHlTU57VIMHjGSdHUynxW9nZU6Saxkli06e_pBnZio6N6eDEdCMcZN_VfmEVflsHd1towf8kYHl2L1GbM3prEgpl6k5PZMRkq9xAWuCPGxQsU8YkGKBAhVx7Q3wNQufOFLhiqTBxY.IGFLEEhz-aLuTQR5Jt6He07ZgfRUGSlUE1H6io8oYhE&dib_tag=se&keywords=independent+published+audio+book&qid=1794443890&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-26&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 8 },
+    slug: "vintage-vine",
+    title: "Vintage Vine",
+    author: "Samantha Skye",
+    category: "romance",
+    subgenre: "Contemporary romance",
+    description: "A duet from The Sunset Valley series, narrated by CJ Bloom and Duncan Cole.",
+    cover: cover_vintage_vine,
+    href: "https://www.amazon.com/Audible-Vintage-Vine/dp/B0HQZFB9D2/ref=tmm_aud_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.3EwqsYLqAQVdpHvAmz53K_R5wksH4aQm6BGrobe6Um_8wHwakmYiNB8bCOzjEAbiHOFUgsDG5e07lRCRp61QOgiLh87p07NbjjYHlTU57VIMHjGSdHUynxW9nZU6Saxkli06e_pBnZio6N6eDEdCMcZN_VfmEVflsHd1towf8kYHl2L1GbM3prEgpl6k5PZMRkq9xAWuCPGxQsU8YkGKBAhVx7Q3wNQufOFLhiqTBxY.IGFLEEhz-aLuTQR5Jt6He07ZgfRUGSlUE1H6io8oYhE&qid=1794443890&sr=8-27",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 9 },
+    slug: "once-bitten",
+    title: "Once Bitten",
+    author: "Bill Hansmann",
+    category: "general",
+    description: "An audiobook by Bill Hansmann.",
+    cover: cover_once_bitten,
+    href: "https://www.amazon.com/Audible-ONCE-BITTEN/dp/B0CXHWRDVY/ref=sr_1_28?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.3EwqsYLqAQVdpHvAmz53K_R5wksH4aQm6BGrobe6Um_8wHwakmYiNB8bCOzjEAbiHOFUgsDG5e07lRCRp61QOgiLh87p07NbjjYHlTU57VIMHjGSdHUynxW9nZU6Saxkli06e_pBnZio6N6eDEdCMcZN_VfmEVflsHd1towf8kYHl2L1GbM3prEgpl6k5PZMRkq9xAWuCPGxQsU8YkGKBAhVx7Q3wNQufOFLhiqTBxY.IGFLEEhz-aLuTQR5Jt6He07ZgfRUGSlUE1H6io8oYhE&dib_tag=se&keywords=independent+published+audio+book&qid=1794443890&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-28&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 10 },
+    slug: "the-brothers-karamazov",
+    title: "The Brothers Karamazov",
+    author: "Fyodor Dostoevsky",
+    category: "classics",
+    subgenre: "Classic novel",
+    description: "Fyodor Dostoevsky’s classic novel, in audio.",
+    cover: cover_the_brothers_karamazov,
+    href: "https://www.amazon.com/Audible-The-Brothers-Karamazov/dp/B0HQWR4FL1/ref=tmm_aud_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.3EwqsYLqAQVdpHvAmz53K_R5wksH4aQm6BGrobe6Um_8wHwakmYiNB8bCOzjEAbiHOFUgsDG5e07lRCRp61QOgiLh87p07NbjjYHlTU57VIMHjGSdHUynxW9nZU6Saxkli06e_pBnZio6N6eDEdCMcZN_VfmEVflsHd1towf8kYHl2L1GbM3prEgpl6k5PZMRkq9xAWuCPGxQsU8YkGKBAhVx7Q3wNQufOFLhiqTBxY.IGFLEEhz-aLuTQR5Jt6He07ZgfRUGSlUE1H6io8oYhE&qid=1794443890&sr=8-31",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 12 },
+    slug: "the-fare",
+    title: "The Fare",
+    author: "Yusuf Hasan",
+    category: "general",
+    description: "A life learned in the back seat, by Yusuf Hasan.",
+    cover: cover_the_fare,
+    href: "https://www.amazon.com/Fare-Life-Learned-Back-Seat/dp/B0HFYCL9QR/ref=sr_1_48?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.DqVAOpr3sMflx0M3CE5DuiBV3OPN06ORy_1yDkPh8TDa0rsfMETdw5zb_aQzBuQSLseOBcavUcVck_X3JXB9n64cbrVC6xHunpoyGuMlwJxGp9UW4Vc0MHpD0QfFrkpyuvWCW_i-hyevb_QiFl2oEw2oJ8TaPYmt6ehZgw0h3Om-AiM1DxWUtSYOm08VVnY0tN4N04wXoRJMt3gbG8d1_TgHx2DGmWW5wbEqj88HEBU.QClZtHsvclRgfVWHLoWUhtMQTP67lZIBCrpmDasaQEM&dib_tag=se&keywords=independent+published+audio+book&qid=1794444092&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-48&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 13 },
+    slug: "secrets-and-scallywags",
+    title: "Secrets and Scallywags",
+    author: "Elizabeth Pantley",
+    category: "mystery",
+    subgenre: "Cozy mystery",
+    description: "Book six in the Magical Cozy Mystery Book Club series.",
+    cover: cover_secrets_and_scallywags,
+    href: "https://www.amazon.com/Secrets-Scallywags-Magical-Mystery-Book/dp/B0CSPNJBTP/ref=sr_1_49?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.DqVAOpr3sMflx0M3CE5DuiBV3OPN06ORy_1yDkPh8TDa0rsfMETdw5zb_aQzBuQSLseOBcavUcVck_X3JXB9n64cbrVC6xHunpoyGuMlwJxGp9UW4Vc0MHpD0QfFrkpyuvWCW_i-hyevb_QiFl2oEw2oJ8TaPYmt6ehZgw0h3Om-AiM1DxWUtSYOm08VVnY0tN4N04wXoRJMt3gbG8d1_TgHx2DGmWW5wbEqj88HEBU.QClZtHsvclRgfVWHLoWUhtMQTP67lZIBCrpmDasaQEM&dib_tag=se&keywords=independent+published+audio+book&qid=1794444092&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-49&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 14 },
+    slug: "the-divine-comedy",
+    title: "The Divine Comedy",
+    author: "Dante Alighieri",
+    category: "classics",
+    subgenre: "Classic epic poem",
+    description: "Dante Alighieri’s epic poem as an unabridged audiobook.",
+    cover: cover_the_divine_comedy,
+    href: "https://www.amazon.com/Audible-The-Divine-Comedy/dp/B0H8H3KSW1/ref=sr_1_51?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.fV4My16tpmB4xQCjkxV2eFHLqB55zcRhyXObe0pPLfbGjHj071QN20LucGBJIEps.fleehSYPPYNd1VvEEC10-5QfpFhd2VddqNBtIzUN85Y&dib_tag=se&keywords=independent+published+audio+book&qid=1794444209&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-51&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 15 },
+    slug: "her-sizzling-billionaire",
+    title: "Her Sizzling Billionaire",
+    author: "Lilah Hart",
+    category: "romance",
+    subgenre: "Billionaire romance",
+    description: "An instalove billionaire romance from the Tycoons of Pleasure Valley series.",
+    cover: cover_her_sizzling_billionaire,
+    href: "https://www.amazon.com/Her-Sizzling-Billionaire-Instalove-Romance/dp/B0CYF4CJ22/ref=sr_1_52?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.fV4My16tpmB4xQCjkxV2eFHLqB55zcRhyXObe0pPLfY27-IWrF0GMKKEp5xp39lnJOdai7RjrIDYtxWSODDEYVa20vuTY84QHf8-TzVbCXIc4JHgvUqC48635iHCjEfxJ0fo6vDonPmaqaRw1SIKQqMAFdwwqZSjH40RFQCFcNI8VI8ySj_yxZH6rwGorXnHjicq2MWwkBbUOmgloc1N52k3TcR-cDa9riqyACfEq6Q.TOGIom8xyyuRHR5yAF41c92wbYcsp_X8c5vHpc2q8FQ&dib_tag=se&keywords=independent+published+audio+book&qid=1794444221&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-52&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 16 },
+    slug: "wuthering-heights",
+    title: "Wuthering Heights",
+    author: "Emily Brontë",
+    category: "classics",
+    subgenre: "Classic novel",
+    description: "Emily Brontë’s classic novel, narrated by Alex Mercer.",
+    cover: cover_wuthering_heights,
+    href: "https://www.amazon.com/Audible-Wuthering-Heights/dp/B0HQZGHBR4/ref=tmm_aud_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.fV4My16tpmB4xQCjkxV2eFHLqB55zcRhyXObe0pPLfY27-IWrF0GMKKEp5xp39lnJOdai7RjrIDYtxWSODDEYVa20vuTY84QHf8-TzVbCXIc4JHgvUqC48635iHCjEfxJ0fo6vDonPmaqaRw1SIKQqMAFdwwqZSjH40RFQCFcNI8VI8ySj_yxZH6rwGorXnHjicq2MWwkBbUOmgloc1N52k3TcR-cDa9riqyACfEq6Q.TOGIom8xyyuRHR5yAF41c92wbYcsp_X8c5vHpc2q8FQ&qid=1794444221&sr=8-54",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 17 },
+    slug: "he-sent-me-the-wrong-text",
+    title: "He Sent Me the Wrong Text, I Packed His Bags and Locked Him Out",
+    author: "Tess Ava & Marci King",
+    category: "fiction",
+    subgenre: "Marriage and revenge drama",
+    description: "Cold revenge, hot nights.",
+    cover: cover_he_sent_me_the_wrong_text,
+    href: "https://www.amazon.com/Sent-Wrong-Text-Packed-Locked/dp/B0FTDYCTV6/ref=sr_1_56?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.fV4My16tpmB4xQCjkxV2eFHLqB55zcRhyXObe0pPLfY27-IWrF0GMKKEp5xp39lnJOdai7RjrIDYtxWSODDEYVa20vuTY84QHf8-TzVbCXIc4JHgvUqC48635iHCjEfxJ0fo6vDonPmaqaRw1SIKQqMAFdwwqZSjH40RFQCFcNI8VI8ySj_yxZH6rwGorXnHjicq2MWwkBbUOmgloc1N52k3TcR-cDa9riqyACfEq6Q.TOGIom8xyyuRHR5yAF41c92wbYcsp_X8c5vHpc2q8FQ&dib_tag=se&keywords=independent+published+audio+book&qid=1794444221&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-56&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 18 },
+    slug: "my-billionaire-husband-signed-our-divorce",
+    title: "My Billionaire Husband Signed Our Divorce Without Reading It",
+    author: "Lyra Ward",
+    category: "romance",
+    subgenre: "Second-chance romance",
+    description: "A billionaire, marriage-in-crisis, second-chance romance.",
+    cover: cover_my_billionaire_husband_signed_our_divorce,
+    href: "https://www.amazon.com/Billionaire-Husband-Divorce-Without-Marriage/dp/B0HL6WJ772/ref=sr_1_65?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.fV4My16tpmB4xQCjkxV2eFHLqB55zcRhyXObe0pPLfY27-IWrF0GMKKEp5xp39lnJOdai7RjrIDYtxWSODDEYVa20vuTY84QHf8-TzVbCXIc4JHgvUqC48635iHCjEfxJ0fo6vDonPmaqaRw1SIKQqMAFdwwqZSjH40RFQCFcNI8VI8ySj_yxZH6rwGorXnHjicq2MWwkBbUOmgloc1N52k3TcR-cDa9riqyACfEq6Q.TOGIom8xyyuRHR5yAF41c92wbYcsp_X8c5vHpc2q8FQ&dib_tag=se&keywords=independent+published+audio+book&qid=1794444221&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-65&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 19 },
+    slug: "the-blacksmith",
+    title: "The Blacksmith",
+    author: "Frank Wheeler",
+    category: "fiction",
+    subgenre: "Western",
+    description: "A classic western adventure from the Westward Western Saga.",
+    cover: cover_the_blacksmith,
+    href: "https://www.amazon.com/Blacksmith-Classic-Western-Adventure/dp/B0GGGX17RH/ref=sr_1_70?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.YkxSFrnpEQ6OxJBznv72pQQkSW_5OYbRAEO4lmC8k7ZaZBAg3NHcvsMdPwqdJOcdx5OS9VkvCsGoJJUSexmuU253cjpJglYCS9PiDnhSyL9CLtcoD7_zu_N2jxgxNdsuOzX07F7-72SG9ji6_e66f6Bb1yVJVhXf9xBuVAMXdT4._E7lh5kVVyfQo50PAaqCzzar6Oyu_QFc_V8a49sAEqA&dib_tag=se&keywords=independent+published+audio+book&qid=1794444349&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-70&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 20 },
+    slug: "pregnant-by-the-contract",
+    title: "Pregnant by the Contract",
+    author: "Tyla Walker",
+    category: "romance",
+    subgenre: "Contract romance",
+    description: "A contract romance by Tyla Walker.",
+    cover: cover_pregnant_by_the_contract,
+    href: "https://www.amazon.com/Audible-Pregnant-By-The-Contract/dp/B0HQ5BD3LM/ref=sr_1_71?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.NBnO8d-WXo6yWZEdkHg7Jdm1FEUitYONnMbqMBYFhk-jYvoNdLwRtCk_s6pQ3Lr2IPjezhdfaY37FqFmPEr_hxvR2kxkaC8WZgTJWc7B245XEkBxr3QKVc7KWtVhI7qU8UWNc-z9MFEg1hk8EOepVvmDllstTVMK8fwVMHOk2X0VQ7CSCL2F4JvhkLF56GdG7y9jh28F4nw0OFhCMvM8E7NTc7yxiy1eBHGrhq0547c.qxzcneX6ro8GncDMntSalp9Luugu6X3mYhzavS4OHbs&dib_tag=se&keywords=independent+published+audio+book&qid=1794444382&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-71&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 21 },
+    slug: "leave-it-to-psmith",
+    title: "Leave It to Psmith",
+    author: "P.G. Wodehouse",
+    category: "classics",
+    subgenre: "Classic comic novel",
+    description: "A Blandings Castle tale by P.G. Wodehouse.",
+    cover: cover_leave_it_to_psmith,
+    href: "https://www.amazon.com/Leave-Psmith-Blandings-Castle-Tale/dp/B0HDYGRBD1/ref=sr_1_72?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.NBnO8d-WXo6yWZEdkHg7Jdm1FEUitYONnMbqMBYFhk-jYvoNdLwRtCk_s6pQ3Lr2IPjezhdfaY37FqFmPEr_hxvR2kxkaC8WZgTJWc7B245XEkBxr3QKVc7KWtVhI7qU8UWNc-z9MFEg1hk8EOepVvmDllstTVMK8fwVMHOk2X0VQ7CSCL2F4JvhkLF56GdG7y9jh28F4nw0OFhCMvM8E7NTc7yxiy1eBHGrhq0547c.qxzcneX6ro8GncDMntSalp9Luugu6X3mYhzavS4OHbs&dib_tag=se&keywords=independent+published+audio+book&qid=1794444382&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-72&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 22 },
+    slug: "zombie-virus-lyrv-27-hope",
+    title: "Zombie Virus LYRV-27: Hope",
+    author: "Ben Friedhof",
+    category: "science-fiction",
+    subgenre: "Post-apocalyptic",
+    description: "Post-apocalyptic survival fiction.",
+    cover: cover_zombie_virus_lyrv_27_hope,
+    href: "https://www.amazon.com/Zombie-Virus-LYRV-27-Post-Apocalyptic-Survival/dp/B0HCHKNQ4B/ref=sr_1_73?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.NBnO8d-WXo6yWZEdkHg7Jdm1FEUitYONnMbqMBYFhk-jYvoNdLwRtCk_s6pQ3Lr2IPjezhdfaY37FqFmPEr_hxvR2kxkaC8WZgTJWc7B245XEkBxr3QKVc7KWtVhI7qU8UWNc-z9MFEg1hk8EOepVvmDllstTVMK8fwVMHOk2X0VQ7CSCL2F4JvhkLF56GdG7y9jh28F4nw0OFhCMvM8E7NTc7yxiy1eBHGrhq0547c.qxzcneX6ro8GncDMntSalp9Luugu6X3mYhzavS4OHbs&dib_tag=se&keywords=independent+published+audio+book&qid=1794444382&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-73&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 23 },
+    slug: "obeying-mr-kingsley",
+    title: "Obeying Mr Kingsley",
+    author: "Juliette N. Banks",
+    category: "romance",
+    subgenre: "Billionaire romance",
+    description: "A spicy billionaire romance from The Obsidian Club.",
+    cover: cover_obeying_mr_kingsley,
+    href: "https://www.amazon.com/Obeying-Mr-Kingsley-Billionaire-Romance/dp/B0DBJSYMGM/ref=sr_1_74?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.NBnO8d-WXo6yWZEdkHg7Jdm1FEUitYONnMbqMBYFhk-jYvoNdLwRtCk_s6pQ3Lr2IPjezhdfaY37FqFmPEr_hxvR2kxkaC8WZgTJWc7B245XEkBxr3QKVc7KWtVhI7qU8UWNc-z9MFEg1hk8EOepVvmDllstTVMK8fwVMHOk2X0VQ7CSCL2F4JvhkLF56GdG7y9jh28F4nw0OFhCMvM8E7NTc7yxiy1eBHGrhq0547c.qxzcneX6ro8GncDMntSalp9Luugu6X3mYhzavS4OHbs&dib_tag=se&keywords=independent+published+audio+book&qid=1794444382&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-74&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 24 },
+    slug: "elizabeth-proposes",
+    title: "Elizabeth Proposes",
+    author: "Melody Haylett",
+    category: "fiction",
+    subgenre: "Pride and Prejudice variation",
+    description: "A Pride and Prejudice variation.",
+    cover: cover_elizabeth_proposes,
+    href: "https://www.amazon.com/Elizabeth-Proposes-Pride-Prejudice-Variation/dp/B0HL6MKJ7X/ref=sr_1_76?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.NBnO8d-WXo6yWZEdkHg7Jdm1FEUitYONnMbqMBYFhk-jYvoNdLwRtCk_s6pQ3Lr2IPjezhdfaY37FqFmPEr_hxvR2kxkaC8WZgTJWc7B245XEkBxr3QKVc7KWtVhI7qU8UWNc-z9MFEg1hk8EOepVvmDllstTVMK8fwVMHOk2X0VQ7CSCL2F4JvhkLF56GdG7y9jh28F4nw0OFhCMvM8E7NTc7yxiy1eBHGrhq0547c.qxzcneX6ro8GncDMntSalp9Luugu6X3mYhzavS4OHbs&dib_tag=se&keywords=independent+published+audio+book&qid=1794444382&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-76&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 1.docx", entry: 25 },
+    slug: "life-goes-on",
+    title: "Life Goes On",
+    author: "Ross Carson",
+    category: "general",
+    description: "An audiobook by Ross Carson.",
+    cover: cover_life_goes_on,
+    href: "https://www.amazon.com/Audible-Life-Goes-On/dp/B0FL1CL9P8/ref=sr_1_77?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.NBnO8d-WXo6yWZEdkHg7Jdm1FEUitYONnMbqMBYFhk-jYvoNdLwRtCk_s6pQ3Lr2IPjezhdfaY37FqFmPEr_hxvR2kxkaC8WZgTJWc7B245XEkBxr3QKVc7KWtVhI7qU8UWNc-z9MFEg1hk8EOepVvmDllstTVMK8fwVMHOk2X0VQ7CSCL2F4JvhkLF56GdG7y9jh28F4nw0OFhCMvM8E7NTc7yxiy1eBHGrhq0547c.qxzcneX6ro8GncDMntSalp9Luugu6X3mYhzavS4OHbs&dib_tag=se&keywords=independent+published+audio+book&qid=1794444382&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-77&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 1 },
+    slug: "the-billionaires-cupcake",
+    title: "The Billionaire’s Cupcake",
+    author: "Chloe Horne",
+    category: "romance",
+    subgenre: "Billionaire romance",
+    description: "An off-limits, forced-proximity billionaire romance.",
+    cover: cover_the_billionaires_cupcake,
+    href: "https://www.amazon.com/Billionaires-Cupcake-Off-Limits-Proximity-Romance/dp/B0GN99W5HQ/ref=sr_1_81?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.NBnO8d-WXo6yWZEdkHg7Jdm1FEUitYONnMbqMBYFhk-jYvoNdLwRtCk_s6pQ3Lr2IPjezhdfaY37FqFmPEr_hxvR2kxkaC8WZgTJWc7B245XEkBxr3QKVc7KWtVhI7qU8UWNc-z9MFEg1hk8EOepVvmDllstTVMK8fwVMHOk2X0VQ7CSCL2F4JvhkLF56GdG7y9jh28F4nw0OFhCMvM8E7NTc7yxiy1eBHGrhq0547c.qxzcneX6ro8GncDMntSalp9Luugu6X3mYhzavS4OHbs&dib_tag=se&keywords=independent+published+audio+book&qid=1794444382&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-81&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 2 },
+    slug: "noise-upstairs",
+    title: "Noise Upstairs",
+    author: "Kaya K.",
+    category: "romance",
+    subgenre: "Enemies-to-lovers romance",
+    description: "An enemies-to-lovers mafia single dad romance.",
+    cover: cover_noise_upstairs,
+    href: "https://www.amazon.com/Noise-Upstairs-Contemporary-Enemies-Romance/dp/B0HJ2YJ4FK/ref=sr_1_83?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.QobTr_Urn-hcDqYTG2yqFHijHR9eZK0a2haJKk-kDhDsRgbXm2YFEQvwJH44UVD-fHeDFGx4128Lxq7fGG1QMA.NQiHnu96Vu0rwcNd_zJmrWYpEawOTEEwZdk7mDxPjIQ&dib_tag=se&keywords=independent+published+audio+book&qid=1794444518&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-83&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 3 },
+    slug: "shot-through-the-heart",
+    title: "Shot Through the Heart",
+    author: "J.P. Sterling",
+    category: "romance",
+    subgenre: "Sports romance",
+    description: "A duet performed by Amanda Friday and Andy Harrington.",
+    cover: cover_shot_through_the_heart,
+    href: "https://www.amazon.com/Audible-Shot-Through-the-Heart/dp/B0FK5ZHVPR/ref=sr_1_90?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.QobTr_Urn-hcDqYTG2yqFIM5OvSf2HY2NzxJ_6FBGzCx4xT4gGj3ilbqdOEz8_d-dvRDrTR8JjvLa5EAoqh8IO7Yb83cosRjHivHZPXXIc3EmQFqv5wyCk5OweuZnCRfdiTWX31rhhqP95sjMQEa6DT1wMN_TyXKEnhLJuFp_OQe2rMirpg8MFH7_dX933p003STXuQgv8h5RMZnzaCVvLfiHzJ80Um1nFTCiZ3K-Gs.9PkGSqDJa_6CEurkfJbzHxpWSTX9jdNCEGXx-3P6-oM&dib_tag=se&keywords=independent+published+audio+book&qid=1794445051&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-90&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 4 },
+    slug: "fortuitous-encounters",
+    title: "Fortuitous Encounters",
+    author: "Wade H Mann",
+    category: "fiction",
+    subgenre: "Pride and Prejudice variation",
+    description: "Eight Pride and Prejudice stories.",
+    cover: cover_fortuitous_encounters,
+    href: "https://www.amazon.com/Fortuitous-Encounters-Pride-Prejudice-Stories/dp/B0HFT72XDN/ref=sr_1_94?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.QobTr_Urn-hcDqYTG2yqFIM5OvSf2HY2NzxJ_6FBGzCx4xT4gGj3ilbqdOEz8_d-dvRDrTR8JjvLa5EAoqh8IO7Yb83cosRjHivHZPXXIc3EmQFqv5wyCk5OweuZnCRfdiTWX31rhhqP95sjMQEa6DT1wMN_TyXKEnhLJuFp_OQe2rMirpg8MFH7_dX933p003STXuQgv8h5RMZnzaCVvLfiHzJ80Um1nFTCiZ3K-Gs.9PkGSqDJa_6CEurkfJbzHxpWSTX9jdNCEGXx-3P6-oM&dib_tag=se&keywords=independent+published+audio+book&qid=1794445051&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-94&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 5 },
+    slug: "fall-for-murder",
+    title: "Fall for Murder",
+    author: "Kathleen Suzette",
+    category: "mystery",
+    subgenre: "Cozy mystery",
+    description: "A Freshly Baked cozy mystery.",
+    cover: cover_fall_for_murder,
+    href: "https://www.amazon.com/Fall-Murder-Freshly-Baked-Mystery/dp/B0FQ4GHDJB/ref=sr_1_97?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.lcKLoH6TwLwPhlmRu9aQjFMFejUXaeG0mBe3uEq4nXc7HDUrnYEig9-50zP3dN3sFPc_FU2B0-6h9lhw0h30nA.pFchZ0QRwfSiTZeYsj3RlzhfpwRXn5M4Iq6GY0FBkyY&dib_tag=se&keywords=independent+published+audio+book&qid=1794445097&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-97&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 6 },
+    slug: "heavens-fall",
+    title: "Heaven’s Fall",
+    author: "Ember Hollis",
+    category: "romance",
+    subgenre: "Paranormal romance",
+    description: "Book one of Pandorax Academy: they sent her alone, where angels fear to tread.",
+    cover: cover_heavens_fall,
+    href: "https://www.amazon.com/Heavens-Fall-Paranormal-Romance-Pandorax/dp/B0HQDMN1LJ/ref=sr_1_110?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.lcKLoH6TwLwPhlmRu9aQjFMFejUXaeG0mBe3uEq4nXc7HDUrnYEig9-50zP3dN3sq-NagmbYKRNsESG6WWX1KcN39XRsfHQXJC6yKS8VwOIYbceQdotz9IuPM-r-yAd8wIRoJ53ptxn3kF_Z63poz4xSLiTjtZb7v90PWI5cIZIQXSYqtUf0gIxrAe55cVvPr4w0UZBAaoE3eAZGa-djZfNeu2XffSdqlkZoUCTtXqo.YKHpvezK96vAZk8CJ5mxCP4zT4NHgA2ZfDqzMJykD7A&dib_tag=se&keywords=independent+published+audio+book&qid=1794445111&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-110&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 7 },
+    slug: "ruined-by-her-billionaire-husband",
+    title: "Ruined by Her Billionaire Husband",
+    author: "Riley King",
+    category: "romance",
+    subgenre: "Marriage-in-crisis romance",
+    description: "A billionaire marriage-in-crisis romance.",
+    cover: cover_ruined_by_her_billionaire_husband,
+    href: "https://www.amazon.com/Ruined-Billionaire-Husband-Marriage-Crisis/dp/B0H93JR624/ref=sr_1_114?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.lcKLoH6TwLwPhlmRu9aQjFMFejUXaeG0mBe3uEq4nXc7HDUrnYEig9-50zP3dN3sq-NagmbYKRNsESG6WWX1KcN39XRsfHQXJC6yKS8VwOIYbceQdotz9IuPM-r-yAd8wIRoJ53ptxn3kF_Z63poz4xSLiTjtZb7v90PWI5cIZIQXSYqtUf0gIxrAe55cVvPr4w0UZBAaoE3eAZGa-djZfNeu2XffSdqlkZoUCTtXqo.YKHpvezK96vAZk8CJ5mxCP4zT4NHgA2ZfDqzMJykD7A&dib_tag=se&keywords=independent+published+audio+book&qid=1794445111&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-114&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 8 },
+    slug: "newlywed-marriage-in-crisis",
+    title: "Newlywed Marriage in Crisis",
+    author: "Quinn Cross",
+    category: "fiction",
+    subgenre: "Marriage drama",
+    description: "Crawling back: a newlywed marriage in crisis.",
+    cover: cover_newlywed_marriage_in_crisis,
+    href: "https://www.amazon.com/Audible-Newlywed-Marriage-in-Crisis/dp/B0HBV9DF24/ref=sr_1_121?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.nkfF4U_bH7vX_lVXebAQ8Yj9XDV0oyXlufx40xzkYSVc6knECWYUzL0KWKdnDS5VHYnzgoPnYta1U_OrVpxwl-8FhM-mmFYNXZqAhckVVfF3sIY7vMd1wLzEIwhBPARKXKAU8mXEZVmQ6qA4AUQR4C7QCRgIsj8fpqUn3Lahkbo.yWXceWYI4wINcuH0-bAv9LyAnyxupHQZLmEFtl38EX0&dib_tag=se&keywords=independent+published+audio+book&qid=1794445156&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-121&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 9 },
+    slug: "murder-in-the-summer-house",
+    title: "Murder in the Summer House",
+    author: "Vickie McKeehan",
+    category: "mystery",
+    subgenre: "Cozy mystery",
+    description: "A Beachcomber mystery.",
+    cover: cover_murder_in_the_summer_house,
+    href: "https://www.amazon.com/Murder-in-The-Summer-House/dp/B0CYCM3RWX/ref=sr_1_124?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.hRIsfXz2nPEdU6jcjfHaTFbo2L8mlv7g-UmtR5oTLWlmS7Py2UXamTuvYJWEMyJ1EqEkUiBAsDN2qgUqu3jYbJ7G0kMg01LpD_tgPPcXoZj5iS3lvZb-HzcVurQJA0NXG0jPOwAsrV0YfmJpwb-QrT8H5Vkpjk8lfEc8pLbDo6xRX1uJZsJWiS6k1RTjFKvhBpNO-nDLCUrAa7FhCLfIXqIv9AeD-oi4vjKf8S_nt-Y.fSfO0wmPY47-s92j-qsZPTgwa4F5Z-Aao3016VjDeEY&dib_tag=se&keywords=independent+published+audio+book&qid=1794445176&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-124&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 10 },
+    slug: "christmas-in-tennessee",
+    title: "Christmas in Tennessee",
+    author: "Kayla Lowe",
+    category: "romance",
+    subgenre: "Christian holiday romance",
+    description: "A Christian Christmas romance.",
+    cover: cover_christmas_in_tennessee,
+    href: "https://www.amazon.com/Christmas-Tennessee-Christian-Romance/dp/B0CY9T73HW/ref=sr_1_126?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.hRIsfXz2nPEdU6jcjfHaTFbo2L8mlv7g-UmtR5oTLWlmS7Py2UXamTuvYJWEMyJ1EqEkUiBAsDN2qgUqu3jYbJ7G0kMg01LpD_tgPPcXoZj5iS3lvZb-HzcVurQJA0NXG0jPOwAsrV0YfmJpwb-QrT8H5Vkpjk8lfEc8pLbDo6xRX1uJZsJWiS6k1RTjFKvhBpNO-nDLCUrAa7FhCLfIXqIv9AeD-oi4vjKf8S_nt-Y.fSfO0wmPY47-s92j-qsZPTgwa4F5Z-Aao3016VjDeEY&dib_tag=se&keywords=independent+published+audio+book&qid=1794445176&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-126&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 11 },
+    slug: "to-heir-is-human",
+    title: "To Heir Is Human",
+    author: "Vixa Vaughn",
+    category: "general",
+    description: "An audiobook by Vixa Vaughn.",
+    cover: cover_to_heir_is_human,
+    href: "https://www.amazon.com/Audible-To-Heir-Is-Human/dp/B0HPLD3LD5/ref=sr_1_128?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.hRIsfXz2nPEdU6jcjfHaTFbo2L8mlv7g-UmtR5oTLWlmS7Py2UXamTuvYJWEMyJ1EqEkUiBAsDN2qgUqu3jYbJ7G0kMg01LpD_tgPPcXoZj5iS3lvZb-HzcVurQJA0NXG0jPOwAsrV0YfmJpwb-QrT8H5Vkpjk8lfEc8pLbDo6xRX1uJZsJWiS6k1RTjFKvhBpNO-nDLCUrAa7FhCLfIXqIv9AeD-oi4vjKf8S_nt-Y.fSfO0wmPY47-s92j-qsZPTgwa4F5Z-Aao3016VjDeEY&dib_tag=se&keywords=independent+published+audio+book&qid=1794445176&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-128&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 12 },
+    slug: "roses-from-pemberley",
+    title: "Roses from Pemberley",
+    author: "Regina Velarde",
+    category: "fiction",
+    subgenre: "Pride and Prejudice variation",
+    description: "A Pride and Prejudice variation.",
+    cover: cover_roses_from_pemberley,
+    href: "https://www.amazon.com/Roses-Pemberley-Pride-Prejudice-Variation/dp/B0H31G3LQW/ref=sr_1_134?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.EsYFy7DudOsMv5ZIGVjVwykTogFjhFbpNP6VnhBkHy2EMwcH4za_36oS-SMnTeN00MkFYj13gRU8V5a_6BPEaflDm-NU3x5eYfBlPYTNCUgQVWOM9-8nOm2JHlnlAFgNDSz6pCnwA9TUYybuKKxIBqB1XUdDOpWgJHuhiIiNdGo.AsfBDAPa8jrGLMACwiMLaXHekapIXuvAms2MWF9YsOs&dib_tag=se&keywords=independent+published+audio+book&qid=1794445220&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-134&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 13 },
+    slug: "the-detour",
+    title: "The Detour",
+    author: "Miranda Flan",
+    category: "fiction",
+    subgenre: "Pride and Prejudice variation",
+    description: "A book based on the characters of Pride and Prejudice.",
+    cover: cover_the_detour,
+    href: "https://www.amazon.com/Detour-based-characters-Pride-Prejudice/dp/B0H5FW5TNV/ref=sr_1_136?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.JNI14z7O2onLzzh9nqeX0DdJDa0r6W1OC4L-6cl64MkHgqwJUFrEQooSatjDs1WlPLU3fYKzbj9OI4BGICCdpneuRUYCFzvVxBFY46bFhrd5xa5VRK_RU_zPXYsA41eTD_qQp6IAIDEVEsSnq-lkj6GZlhpLhYlmBX4Oe2YzcuPwtN1rph7hc5Q67Auly_PRWuIDDdRYEUaqtqBKPKoXE8rtyrZ-kvvA5qKT_8gIGwI._Yt8HuWL5KSCfyoCr86xj5fHi8C2v6-LIxpJSdGA4sE&dib_tag=se&keywords=independent+published+audio+book&qid=1794445237&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-136&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 14 },
+    slug: "stolen-and-bred-by-the-bratva",
+    title: "Stolen & Bred by the Bratva",
+    author: "Annee Jones",
+    category: "romance",
+    subgenre: "Mafia romance",
+    description: "An obsessed billionaire romance from the Bred by the Bratva series.",
+    cover: cover_stolen_and_bred_by_the_bratva,
+    href: "https://www.amazon.com/Stolen-Bred-Bratva-Obsessed-Billionaire/dp/B0H5T5KJPF/ref=sr_1_139?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.JNI14z7O2onLzzh9nqeX0DdJDa0r6W1OC4L-6cl64MkHgqwJUFrEQooSatjDs1WlPLU3fYKzbj9OI4BGICCdpneuRUYCFzvVxBFY46bFhrd5xa5VRK_RU_zPXYsA41eTD_qQp6IAIDEVEsSnq-lkj6GZlhpLhYlmBX4Oe2YzcuPwtN1rph7hc5Q67Auly_PRWuIDDdRYEUaqtqBKPKoXE8rtyrZ-kvvA5qKT_8gIGwI._Yt8HuWL5KSCfyoCr86xj5fHi8C2v6-LIxpJSdGA4sE&dib_tag=se&keywords=independent+published+audio+book&qid=1794445237&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-139&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 15 },
+    slug: "he-rejected-me-for-my-twin-sister",
+    title: "He Rejected Me for My Twin Sister",
+    author: "Rue Ransom",
+    category: "romance",
+    subgenre: "Revenge romance",
+    description: "A wife’s retribution: a marriage betrayal, infidelity and revenge romance novella.",
+    cover: cover_he_rejected_me_for_my_twin_sister,
+    href: "https://www.amazon.com/He-Rejected-Twin-Sister-Infidelity/dp/B0HBS11PJR/ref=sr_1_140?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.JNI14z7O2onLzzh9nqeX0DdJDa0r6W1OC4L-6cl64MkHgqwJUFrEQooSatjDs1WlPLU3fYKzbj9OI4BGICCdpneuRUYCFzvVxBFY46bFhrd5xa5VRK_RU_zPXYsA41eTD_qQp6IAIDEVEsSnq-lkj6GZlhpLhYlmBX4Oe2YzcuPwtN1rph7hc5Q67Auly_PRWuIDDdRYEUaqtqBKPKoXE8rtyrZ-kvvA5qKT_8gIGwI._Yt8HuWL5KSCfyoCr86xj5fHi8C2v6-LIxpJSdGA4sE&dib_tag=se&keywords=independent+published+audio+book&qid=1794445237&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-140&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 16 },
+    slug: "aliens-chosen-mate",
+    title: "Alien’s Chosen Mate",
+    author: "Emerald Cox",
+    category: "romance",
+    subgenre: "Sci-fi romance",
+    description: "A science fiction alien dating agency romance.",
+    cover: cover_aliens_chosen_mate,
+    href: "https://www.amazon.com/Aliens-Chosen-Mate-Science-Fiction/dp/B0G65BLXRD/ref=sr_1_141?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.JNI14z7O2onLzzh9nqeX0DdJDa0r6W1OC4L-6cl64MkHgqwJUFrEQooSatjDs1WlPLU3fYKzbj9OI4BGICCdpneuRUYCFzvVxBFY46bFhrd5xa5VRK_RU_zPXYsA41eTD_qQp6IAIDEVEsSnq-lkj6GZlhpLhYlmBX4Oe2YzcuPwtN1rph7hc5Q67Auly_PRWuIDDdRYEUaqtqBKPKoXE8rtyrZ-kvvA5qKT_8gIGwI._Yt8HuWL5KSCfyoCr86xj5fHi8C2v6-LIxpJSdGA4sE&dib_tag=se&keywords=independent+published+audio+book&qid=1794445237&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-141&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 17 },
+    slug: "vipers-desire",
+    title: "Viper’s Desire",
+    author: "Vera Rivers",
+    category: "romance",
+    subgenre: "MC romance",
+    description: "A forbidden instalove romance from the Ash Valley Hellborn Kings MC.",
+    cover: cover_vipers_desire,
+    href: "https://www.amazon.com/Vipers-Desire-Forbidden-Instalove-Romance/dp/B0HH1ZPDYN/ref=sr_1_145?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.i0udaQY06X_L8MLWUYGb9JGP6aiuebBdQ4VNN4quXJeY8C_CBO-i0T1SSdaqf5NQxQEN5E6_9YtSwBLc9zNpZQ.1yK4W36GrvMTMNyrcgdDAlzvI8RsuqZhv9R7mdKoI5A&dib_tag=se&keywords=independent+published+audio+book&qid=1794445280&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-145&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 18 },
+    slug: "the-grandfather",
+    title: "The Grandfather",
+    author: "Miranda Flan",
+    category: "fiction",
+    subgenre: "Pride and Prejudice variation",
+    description: "A book based on the characters of Pride and Prejudice.",
+    cover: cover_the_grandfather,
+    href: "https://www.amazon.com/Grandfather-based-characters-Pride-Prejudice/dp/B0H35VGX6D/ref=sr_1_146?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.i0udaQY06X_L8MLWUYGb9JGP6aiuebBdQ4VNN4quXJeY8C_CBO-i0T1SSdaqf5NQwA8BW9BMbdiy31tKEmi3fFDD3T1Q3JWYNuBh-Wz8b49dUQDYX1uzVOutRbH43JjhUDgV_KTpPaAk215sCWzDGnbEOgxFEFxpOiNTUYK3ZS1AeOOroG_B0adygk-y1fcDiuTiM3PGwcoV6lzziHcp5RfacXTUo50tc8-6jx_-xZI.56YyHXfcDpk4yYCp-Fg91wBTCTvfY2LS7iXlnHPB-U0&dib_tag=se&keywords=independent+published+audio+book&qid=1794445290&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-146&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 19 },
+    slug: "my-secret-crush",
+    title: "My Secret Crush",
+    author: "Reba Bale",
+    category: "romance",
+    subgenre: "Sapphic romance",
+    description: "A lesbian romance from the Friends to Lovers series.",
+    cover: cover_my_secret_crush,
+    href: "https://www.amazon.com/My-Secret-Crush-Lesbian-Romance/dp/B0CRHZPPK1/ref=sr_1_147?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.i0udaQY06X_L8MLWUYGb9JGP6aiuebBdQ4VNN4quXJeY8C_CBO-i0T1SSdaqf5NQwA8BW9BMbdiy31tKEmi3fFDD3T1Q3JWYNuBh-Wz8b49dUQDYX1uzVOutRbH43JjhUDgV_KTpPaAk215sCWzDGnbEOgxFEFxpOiNTUYK3ZS1AeOOroG_B0adygk-y1fcDiuTiM3PGwcoV6lzziHcp5RfacXTUo50tc8-6jx_-xZI.56YyHXfcDpk4yYCp-Fg91wBTCTvfY2LS7iXlnHPB-U0&dib_tag=se&keywords=independent+published+audio+book&qid=1794445290&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-147&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 20 },
+    slug: "the-house-key-he-gave-my-best-friend",
+    title: "The House Key He Gave My Best Friend",
+    author: "Sadie Shore",
+    category: "romance",
+    subgenre: "Revenge romance",
+    description: "A cheating husband, best friend betrayal, divorce revenge romance novella.",
+    cover: cover_the_house_key_he_gave_my_best_friend,
+    href: "https://www.amazon.com/House-Key-Gave-Best-Friend/dp/B0D53K3KLQ/ref=sr_1_150?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.i0udaQY06X_L8MLWUYGb9JGP6aiuebBdQ4VNN4quXJeY8C_CBO-i0T1SSdaqf5NQwA8BW9BMbdiy31tKEmi3fFDD3T1Q3JWYNuBh-Wz8b49dUQDYX1uzVOutRbH43JjhUDgV_KTpPaAk215sCWzDGnbEOgxFEFxpOiNTUYK3ZS1AeOOroG_B0adygk-y1fcDiuTiM3PGwcoV6lzziHcp5RfacXTUo50tc8-6jx_-xZI.56YyHXfcDpk4yYCp-Fg91wBTCTvfY2LS7iXlnHPB-U0&dib_tag=se&keywords=independent+published+audio+book&qid=1794445290&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-150&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 21 },
+    slug: "maid-of-dishonor",
+    title: "Maid of Dishonor",
+    author: "Rue Ransom",
+    category: "romance",
+    subgenre: "Revenge romance",
+    description: "A Scorned Wives Club marriage betrayal, infidelity and revenge romance novella.",
+    cover: cover_maid_of_dishonor,
+    href: "https://www.amazon.com/Maid-Dishonor-Marriage-Betrayal-Infidelity/dp/B0H5Y5NXNM/ref=sr_1_152?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.i0udaQY06X_L8MLWUYGb9JGP6aiuebBdQ4VNN4quXJeY8C_CBO-i0T1SSdaqf5NQwA8BW9BMbdiy31tKEmi3fFDD3T1Q3JWYNuBh-Wz8b49dUQDYX1uzVOutRbH43JjhUDgV_KTpPaAk215sCWzDGnbEOgxFEFxpOiNTUYK3ZS1AeOOroG_B0adygk-y1fcDiuTiM3PGwcoV6lzziHcp5RfacXTUo50tc8-6jx_-xZI.56YyHXfcDpk4yYCp-Fg91wBTCTvfY2LS7iXlnHPB-U0&dib_tag=se&keywords=independent+published+audio+book&qid=1794445290&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-152&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 22 },
+    slug: "my-husband-cheated-with-the-nanny",
+    title: "My Husband Cheated with the Nanny",
+    author: "Muriel Waverly",
+    category: "fiction",
+    subgenre: "Marriage and revenge drama",
+    description: "She gets revenge.",
+    cover: cover_my_husband_cheated_with_the_nanny,
+    href: "https://www.amazon.com/My-Husband-Cheated-Nanny-Infidelity/dp/B0HH8B12XJ/ref=sr_1_154?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.i0udaQY06X_L8MLWUYGb9JGP6aiuebBdQ4VNN4quXJeY8C_CBO-i0T1SSdaqf5NQwA8BW9BMbdiy31tKEmi3fFDD3T1Q3JWYNuBh-Wz8b49dUQDYX1uzVOutRbH43JjhUDgV_KTpPaAk215sCWzDGnbEOgxFEFxpOiNTUYK3ZS1AeOOroG_B0adygk-y1fcDiuTiM3PGwcoV6lzziHcp5RfacXTUo50tc8-6jx_-xZI.56YyHXfcDpk4yYCp-Fg91wBTCTvfY2LS7iXlnHPB-U0&dib_tag=se&keywords=independent+published+audio+book&qid=1794445290&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-154&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 23 },
+    slug: "scott-jackson",
+    title: "Scott Jackson",
+    author: "William Black",
+    category: "fiction",
+    subgenre: "Western",
+    description: "An American post-Civil War western.",
+    cover: cover_scott_jackson,
+    href: "https://www.amazon.com/Audible-Scott-Jackson/dp/B0GPP8Z4MZ/ref=sr_1_155?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.i0udaQY06X_L8MLWUYGb9JGP6aiuebBdQ4VNN4quXJeY8C_CBO-i0T1SSdaqf5NQwA8BW9BMbdiy31tKEmi3fFDD3T1Q3JWYNuBh-Wz8b49dUQDYX1uzVOutRbH43JjhUDgV_KTpPaAk215sCWzDGnbEOgxFEFxpOiNTUYK3ZS1AeOOroG_B0adygk-y1fcDiuTiM3PGwcoV6lzziHcp5RfacXTUo50tc8-6jx_-xZI.56YyHXfcDpk4yYCp-Fg91wBTCTvfY2LS7iXlnHPB-U0&dib_tag=se&keywords=independent+published+audio+book&qid=1794445290&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-155&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 24 },
+    slug: "the-duke-of-frost",
+    title: "The Duke of Frost",
+    author: "Loretta Levine",
+    category: "romance",
+    subgenre: "Historical romance",
+    description: "A steamy historical Regency romance novel.",
+    cover: cover_the_duke_of_frost,
+    href: "https://www.amazon.com/Duke-Frost-Historical-Regency-Romance/dp/B0HPRHS1MZ/ref=sr_1_156?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.i0udaQY06X_L8MLWUYGb9JGP6aiuebBdQ4VNN4quXJeY8C_CBO-i0T1SSdaqf5NQwA8BW9BMbdiy31tKEmi3fFDD3T1Q3JWYNuBh-Wz8b49dUQDYX1uzVOutRbH43JjhUDgV_KTpPaAk215sCWzDGnbEOgxFEFxpOiNTUYK3ZS1AeOOroG_B0adygk-y1fcDiuTiM3PGwcoV6lzziHcp5RfacXTUo50tc8-6jx_-xZI.56YyHXfcDpk4yYCp-Fg91wBTCTvfY2LS7iXlnHPB-U0&dib_tag=se&keywords=independent+published+audio+book&qid=1794445290&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-156&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 25 },
+    slug: "unexpected-ascension",
+    title: "Unexpected Ascension",
+    author: "NotFaker201",
+    category: "fantasy",
+    subgenre: "Isekai adventure",
+    description: "Book one of an isekai adventure.",
+    cover: cover_unexpected_ascension,
+    href: "https://www.amazon.com/Unexpected-Ascension-Book-Isekai-Adventure/dp/B0D6LFFFTN/ref=sr_1_159?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.i0udaQY06X_L8MLWUYGb9JGP6aiuebBdQ4VNN4quXJeY8C_CBO-i0T1SSdaqf5NQwA8BW9BMbdiy31tKEmi3fFDD3T1Q3JWYNuBh-Wz8b49dUQDYX1uzVOutRbH43JjhUDgV_KTpPaAk215sCWzDGnbEOgxFEFxpOiNTUYK3ZS1AeOOroG_B0adygk-y1fcDiuTiM3PGwcoV6lzziHcp5RfacXTUo50tc8-6jx_-xZI.56YyHXfcDpk4yYCp-Fg91wBTCTvfY2LS7iXlnHPB-U0&dib_tag=se&keywords=independent+published+audio+book&qid=1794445290&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-159&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 11.docx", entry: 26 },
+    slug: "murder-most-vile-volume-50",
+    title: "Murder Most Vile, Volume 50",
+    author: "Robert Keller",
+    category: "nonfiction",
+    subgenre: "True crime",
+    description: "Eighteen shocking true murder cases.",
+    cover: cover_murder_most_vile_volume_50,
+    href: "https://www.amazon.com/Murder-Most-Vile-50-Shocking/dp/B0F18X8FRH/ref=sr_1_171?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.Y-L_g5hxsJErvr0HMAuuOifN1_4PgXC6Zn5LChimUHhixrOSykw6kuPx8OI2Wi0s4NXPRLG7En94tIRbPBsgakQI67_ekbE8m0bm6jRUsSyyVCegBCLaA3hjAHDW39PEq_FEIxoOm1R2oO5kdYX4PmCAkmKPikwYtoEGk174Pfc.HpfOpKmsgMDyaNmQnLfQU4dJzdM6ZE_RctHbcnFsb84&dib_tag=se&keywords=independent+published+audio+book&qid=1794445389&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-171&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 1 },
+    slug: "elizabeths-acquaintance",
+    title: "Elizabeth’s Acquaintance",
+    author: "Grace Belton",
+    category: "fiction",
+    subgenre: "Pride and Prejudice variation",
+    description: "A Pride and Prejudice variation.",
+    cover: cover_elizabeths_acquaintance,
+    href: "https://www.amazon.com/Elizabeths-Acquaintance-Pride-Prejudice-Variation/dp/B0CY992D97/ref=sr_1_175?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.Y-L_g5hxsJErvr0HMAuuOifN1_4PgXC6Zn5LChimUHhixrOSykw6kuPx8OI2Wi0s4NXPRLG7En94tIRbPBsgakQI67_ekbE8m0bm6jRUsSyyVCegBCLaA3hjAHDW39PEq_FEIxoOm1R2oO5kdYX4PmCAkmKPikwYtoEGk174Pfc.HpfOpKmsgMDyaNmQnLfQU4dJzdM6ZE_RctHbcnFsb84&dib_tag=se&keywords=independent+published+audio+book&qid=1794445389&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-175&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 2 },
+    slug: "unexpected-attraction",
+    title: "Unexpected Attraction",
+    author: "Nina Sestina",
+    category: "general",
+    description: "An audiobook by Nina Sestina.",
+    cover: cover_unexpected_attraction,
+    href: "https://www.amazon.com/Audible-Unexpected-Attraction/dp/B0CY9JZW5M/ref=sr_1_178?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.6PRK-Q2_t9yFhWpkXMqsz4SugAy4z34cZUutuRKOSp2Vg5ogNJXOP2RGTf__wqYkbL-RRQK4-ZWK06KyiNIZZg.USQ6zuxn1iEmJq7DxjVQq39Y7wrsz_gde8XxIsaw1XU&dib_tag=se&keywords=independent+published+audio+book&qid=1794445464&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-178&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 3 },
+    slug: "my-husband-cheats-with-my-best-friend",
+    title: "My Husband Cheats with My Best Friend",
+    author: "Muriel Waverly",
+    category: "fiction",
+    subgenre: "Marriage and revenge drama",
+    description: "She gets revenge.",
+    cover: cover_my_husband_cheats_with_my_best_friend,
+    href: "https://www.amazon.com/Husband-Cheats-Best-Friend-Infidelity/dp/B0HBPPNQ46/ref=sr_1_181?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.6PRK-Q2_t9yFhWpkXMqsz4SugAy4z34cZUutuRKOSp2Vg5ogNJXOP2RGTf__wqYkbL-RRQK4-ZWK06KyiNIZZg.USQ6zuxn1iEmJq7DxjVQq39Y7wrsz_gde8XxIsaw1XU&dib_tag=se&keywords=independent+published+audio+book&qid=1794445464&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-181&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 4 },
+    slug: "mine-mine-mine",
+    title: "Mine, Mine, Mine!",
+    author: "Wade H Mann",
+    category: "fiction",
+    subgenre: "Pride and Prejudice variation",
+    description: "A Pride and Prejudice variation.",
+    cover: cover_mine_mine_mine,
+    href: "https://www.amazon.com/Mine-Pride-Prejudice-Variation/dp/B0FP9YZGF7/ref=sr_1_183?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.Ytf6P1oY9-0IhK__HNLjAMy8G9DRwvBKRZI7sXSDxOuIAuebAgCrJ3utyQ5V5RSY1jV6h9xjTXmjcazXj3zluZEY_B0i21qoSvsFp6OTfUWocdHeoiP12wDuMZHvMb4jrRfxm9RgVUHAfcmzoqMPUmIPXFbK9CQEkpCaUC_sN5E.F2_oQUV3X1FaCFNLh7Zhx0FzS7wewSR_8vESScRQ0LU&dib_tag=se&keywords=independent+published+audio+book&qid=1794445464&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-183&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 5 },
+    slug: "not-my-undergarment",
+    title: "Not My Undergarment",
+    author: "Tess Ava & Marci King",
+    category: "fiction",
+    subgenre: "Marriage and revenge drama",
+    description: "From the Oh No He Didn’t Chronicles.",
+    cover: cover_not_my_undergarment,
+    href: "https://www.amazon.com/Not-My-Undergarment-Later-Life/dp/B0H5RLHC9L/ref=sr_1_189?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.Ytf6P1oY9-0IhK__HNLjAMy8G9DRwvBKRZI7sXSDxOuIAuebAgCrJ3utyQ5V5RSY1jV6h9xjTXmjcazXj3zluZEY_B0i21qoSvsFp6OTfUWocdHeoiP12wDuMZHvMb4jrRfxm9RgVUHAfcmzoqMPUmIPXFbK9CQEkpCaUC_sN5E.F2_oQUV3X1FaCFNLh7Zhx0FzS7wewSR_8vESScRQ0LU&dib_tag=se&keywords=independent+published+audio+book&qid=1794445464&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-189&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 6 },
+    slug: "an-unexpected-family",
+    title: "An Unexpected Family",
+    author: "Randa Hink",
+    category: "fiction",
+    subgenre: "Novel",
+    description: "A novel by Randa Hink.",
+    cover: cover_an_unexpected_family,
+    href: "https://www.amazon.com/Audible-An-Unexpected-Family/dp/B0GFC1N63Z/ref=sr_1_191?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.Ytf6P1oY9-0IhK__HNLjAMy8G9DRwvBKRZI7sXSDxOuIAuebAgCrJ3utyQ5V5RSY1jV6h9xjTXmjcazXj3zluZEY_B0i21qoSvsFp6OTfUWocdHeoiP12wDuMZHvMb4jrRfxm9RgVUHAfcmzoqMPUmIPXFbK9CQEkpCaUC_sN5E.F2_oQUV3X1FaCFNLh7Zhx0FzS7wewSR_8vESScRQ0LU&dib_tag=se&keywords=independent+published+audio+book&qid=1794445464&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-191&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 7 },
+    slug: "moms-boyfriend",
+    title: "Mom’s Boyfriend",
+    author: "Kohen King",
+    category: "romance",
+    subgenre: "Slice-of-life romance",
+    description: "Book four of The Landlord’s Harem, a slice-of-life romance.",
+    cover: cover_moms_boyfriend,
+    href: "https://www.amazon.com/Moms-Boyfriend-Slice-Life-Romance/dp/B0HFFBDHXJ/ref=sr_1_194?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.O2KXPGTwT8a6fsPgxKIT2xIv14iT0EwqpCKsl71Zkc_IPJkWWTd9nZ6gCnXotxUQxKEflFB7Pl03iqk2EzBa5w.PwTxpPhtCgitX3c85Jylc1dRfOzBLbiuTm8Etp1lDsA&dib_tag=se&keywords=independent+published+audio+book&qid=1794445532&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-194&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 8 },
+    slug: "the-birthday-trip-for-two",
+    title: "The Birthday Trip for Two",
+    author: "Celia Raye & Tessa Lynde",
+    category: "fiction",
+    subgenre: "Marriage and revenge drama",
+    description: "The Wife’s Receipts: a marriage betrayal, infidelity and revenge novella.",
+    cover: cover_the_birthday_trip_for_two,
+    href: "https://www.amazon.com/Birthday-Trip-Two-Marriage-Infidelity/dp/B0H37R9H6V/ref=sr_1_195?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.O2KXPGTwT8a6fsPgxKIT2xIv14iT0EwqpCKsl71Zkc_IPJkWWTd9nZ6gCnXotxUQxKEflFB7Pl03iqk2EzBa5w.PwTxpPhtCgitX3c85Jylc1dRfOzBLbiuTm8Etp1lDsA&dib_tag=se&keywords=independent+published+audio+book&qid=1794445532&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-195&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 9 },
+    slug: "blueberries-and-betrayal",
+    title: "Blueberries and Betrayal",
+    author: "Kathleen Suzette",
+    category: "mystery",
+    subgenre: "Cozy mystery",
+    description: "A Freshly Baked cozy mystery.",
+    cover: cover_blueberries_and_betrayal,
+    href: "https://www.amazon.com/Blueberries-Betrayal-Freshly-Baked-Mystery/dp/B0GWNDK3H1/ref=sr_1_197?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.O2KXPGTwT8a6fsPgxKIT2xIv14iT0EwqpCKsl71Zkc_IPJkWWTd9nZ6gCnXotxUQxKEflFB7Pl03iqk2EzBa5w.PwTxpPhtCgitX3c85Jylc1dRfOzBLbiuTm8Etp1lDsA&dib_tag=se&keywords=independent+published+audio+book&qid=1794445532&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-197&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 10 },
+    slug: "weekend-of-passion",
+    title: "Weekend of Passion",
+    author: "Nina Sestina",
+    category: "general",
+    description: "An audiobook by Nina Sestina.",
+    cover: cover_weekend_of_passion,
+    href: "https://www.amazon.com/Audible-Weekend-of-Passion/dp/B0F8HWYRXJ/ref=sr_1_199?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.jkbzrxsysduAGD_8_DuLsFo3z_jZP-GnXOGabud_Ggs8uMHLyGoxLQevwdbvIfimYssO73gWPAAyVsaodNa6iniipW1pdcx86kgrLLk__TJuHg5xSWlKbxMFkSS_Cpe_IvFArtWtIcmzsoVsx87WMYOcYXeJ53Q_VbakVUJ5mdc.nM38dmP87_sHVRVmFuJvs4gxs6cgIDiEtV-KE7fdeLE&dib_tag=se&keywords=independent+published+audio+book&qid=1794445532&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-199&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 11 },
+    slug: "secret-exploration",
+    title: "Secret Exploration",
+    author: "Nina Sestina",
+    category: "general",
+    description: "An audiobook by Nina Sestina.",
+    cover: cover_secret_exploration,
+    href: "https://www.amazon.com/Audible-Secret-Exploration/dp/B0F8HZGN5S/ref=sr_1_202?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.jkbzrxsysduAGD_8_DuLsFo3z_jZP-GnXOGabud_Ggs8uMHLyGoxLQevwdbvIfimYssO73gWPAAyVsaodNa6iniipW1pdcx86kgrLLk__TJuHg5xSWlKbxMFkSS_Cpe_IvFArtWtIcmzsoVsx87WMYOcYXeJ53Q_VbakVUJ5mdc.nM38dmP87_sHVRVmFuJvs4gxs6cgIDiEtV-KE7fdeLE&dib_tag=se&keywords=independent+published+audio+book&qid=1794445532&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-202&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 12 },
+    slug: "death-and-sweets",
+    title: "Death and Sweets",
+    author: "Kathleen Suzette",
+    category: "mystery",
+    subgenre: "Cozy mystery",
+    description: "A Pumpkin Hollow mystery.",
+    cover: cover_death_and_sweets,
+    href: "https://www.amazon.com/Death-Sweets-Pumpkin-Hollow-Mystery/dp/B0FMSRCYRK/ref=sr_1_204?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.jkbzrxsysduAGD_8_DuLsFo3z_jZP-GnXOGabud_Ggs8uMHLyGoxLQevwdbvIfimYssO73gWPAAyVsaodNa6iniipW1pdcx86kgrLLk__TJuHg5xSWlKbxMFkSS_Cpe_IvFArtWtIcmzsoVsx87WMYOcYXeJ53Q_VbakVUJ5mdc.nM38dmP87_sHVRVmFuJvs4gxs6cgIDiEtV-KE7fdeLE&dib_tag=se&keywords=independent+published+audio+book&qid=1794445532&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-204&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 13 },
+    slug: "unthinkable",
+    title: "Unthinkable",
+    author: "Jia West",
+    category: "romance",
+    subgenre: "Sports romance",
+    description: "A single mom hockey romance.",
+    cover: cover_unthinkable,
+    href: "https://www.amazon.com/Unthinkable-BWWM-Single-Hockey-Romance/dp/B0GPFL4J2K/ref=sr_1_206?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.jkbzrxsysduAGD_8_DuLsFo3z_jZP-GnXOGabud_Ggs8uMHLyGoxLQevwdbvIfimYssO73gWPAAyVsaodNa6iniipW1pdcx86kgrLLk__TJuHg5xSWlKbxMFkSS_Cpe_IvFArtWtIcmzsoVsx87WMYOcYXeJ53Q_VbakVUJ5mdc.nM38dmP87_sHVRVmFuJvs4gxs6cgIDiEtV-KE7fdeLE&dib_tag=se&keywords=independent+published+audio+book&qid=1794445532&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-206&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 14 },
+    slug: "a-season-of-love",
+    title: "A Season of Love",
+    author: "Annitia L. Jackson",
+    category: "romance",
+    subgenre: "Holiday romance",
+    description: "A Valentine’s romance novella.",
+    cover: cover_a_season_of_love,
+    href: "https://www.amazon.com/Season-Love-Valentines-Romance-Novella/dp/B0F2PW3QXF/ref=sr_1_210?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.8NqWcYRr57fidfZIg36FzsjKEALs3QJkoxLOj9V7PXl0w861FkUCCR5UhNCbGlsfuqSWrV2C4KKEuB9oDrFp7A.gfI6eU2Vi23rhnfz2jN6Fq8BAR8-8yD7ZIcRsebJup8&dib_tag=se&keywords=independent+published+audio+book&qid=1794445610&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-210&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 15 },
+    slug: "in-rotation",
+    title: "In Rotation",
+    author: "Jennifer Sweet",
+    category: "general",
+    description: "A sweet, gradual feminization story.",
+    cover: cover_in_rotation,
+    href: "https://www.amazon.com/Rotation-Gradual-Feminization-Story/dp/B0F67MSYSR/ref=sr_1_214?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.LW3PZiSLQw8y9EZJwYPchcGHL-mNOpAd7s8XdMiEjoivR50uMEbtvE0EjmCYMPnZzZb3_IUPwMhxJqWZZLNg-IDdpK4swlkRM3LzO6iwP-vtT2MtbUGmBD6VZEB-4lfWsSO4Ml4tOR7XcFkIpWxwoHy2XEMJCesCOiq6MNb7Mv8.5BtbzpBUtPfhFTVJQbPRf382LawW3EPr_J1wyYYR_Qc&dib_tag=se&keywords=independent+published+audio+book&qid=1794445610&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-214&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 16 },
+    slug: "guarding-the-rock-star",
+    title: "Guarding the Rock Star",
+    author: "Reba Bale",
+    category: "romance",
+    subgenre: "Paranormal romance",
+    description: "Book two of the Sapphic Security series.",
+    cover: cover_guarding_the_rock_star,
+    href: "https://www.amazon.com/Guarding-Rock-Star-Paranormal-Romantic/dp/B0CY2YNMKB/ref=sr_1_215?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.LW3PZiSLQw8y9EZJwYPchcGHL-mNOpAd7s8XdMiEjoivR50uMEbtvE0EjmCYMPnZzZb3_IUPwMhxJqWZZLNg-IDdpK4swlkRM3LzO6iwP-vtT2MtbUGmBD6VZEB-4lfWsSO4Ml4tOR7XcFkIpWxwoHy2XEMJCesCOiq6MNb7Mv8.5BtbzpBUtPfhFTVJQbPRf382LawW3EPr_J1wyYYR_Qc&dib_tag=se&keywords=independent+published+audio+book&qid=1794445610&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-215&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 17 },
+    slug: "behind-closed-doors",
+    title: "Behind Closed Doors",
+    author: "Nina Sestina",
+    category: "general",
+    description: "An audiobook by Nina Sestina.",
+    cover: cover_behind_closed_doors,
+    href: "https://www.amazon.com/Audible-Behind-Closed-Doors/dp/B0F8J2MP5K/ref=sr_1_217?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.LW3PZiSLQw8y9EZJwYPchcGHL-mNOpAd7s8XdMiEjoivR50uMEbtvE0EjmCYMPnZzZb3_IUPwMhxJqWZZLNg-IDdpK4swlkRM3LzO6iwP-vtT2MtbUGmBD6VZEB-4lfWsSO4Ml4tOR7XcFkIpWxwoHy2XEMJCesCOiq6MNb7Mv8.5BtbzpBUtPfhFTVJQbPRf382LawW3EPr_J1wyYYR_Qc&dib_tag=se&keywords=independent+published+audio+book&qid=1794445610&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-217&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 18 },
+    slug: "the-devon-murders",
+    title: "The Devon Murders",
+    author: "Peter Zander-Howell",
+    category: "mystery",
+    subgenre: "Period detective mystery",
+    description: "A 1951 Philip Bryce mystery.",
+    cover: cover_the_devon_murders,
+    href: "https://www.amazon.com/Devon-Murders-Philip-Bryce-mystery/dp/B0F92QT5HD/ref=sr_1_221?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.LW3PZiSLQw8y9EZJwYPchcGHL-mNOpAd7s8XdMiEjoivR50uMEbtvE0EjmCYMPnZzZb3_IUPwMhxJqWZZLNg-IDdpK4swlkRM3LzO6iwP-vtT2MtbUGmBD6VZEB-4lfWsSO4Ml4tOR7XcFkIpWxwoHy2XEMJCesCOiq6MNb7Mv8.5BtbzpBUtPfhFTVJQbPRf382LawW3EPr_J1wyYYR_Qc&dib_tag=se&keywords=independent+published+audio+book&qid=1794445610&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-221&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 19 },
+    slug: "a-saint-of-longbourn",
+    title: "A Saint of Longbourn",
+    author: "Antioppe Pfaff",
+    category: "romance",
+    subgenre: "Regency romance",
+    description: "A Regency romance and Pride and Prejudice variation.",
+    cover: cover_a_saint_of_longbourn,
+    href: "https://www.amazon.com/Saint-Longbourn-Regency-Prejudice-Variation/dp/B0CY8VLC8Q/ref=sr_1_222?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.LW3PZiSLQw8y9EZJwYPchcGHL-mNOpAd7s8XdMiEjoivR50uMEbtvE0EjmCYMPnZzZb3_IUPwMhxJqWZZLNg-IDdpK4swlkRM3LzO6iwP-vtT2MtbUGmBD6VZEB-4lfWsSO4Ml4tOR7XcFkIpWxwoHy2XEMJCesCOiq6MNb7Mv8.5BtbzpBUtPfhFTVJQbPRf382LawW3EPr_J1wyYYR_Qc&dib_tag=se&keywords=independent+published+audio+book&qid=1794445610&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-222&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 20 },
+    slug: "accidental-baby-for-the-billionaire",
+    title: "Accidental Baby for the Billionaire",
+    author: "Josie Hart",
+    category: "romance",
+    subgenre: "Billionaire romance",
+    description: "An enemies-to-lovers billionaire romance.",
+    cover: cover_accidental_baby_for_the_billionaire,
+    href: "https://www.amazon.com/Accidental-Baby-Billionaire-Enemies-Romance/dp/B0CQ2YWM11/ref=sr_1_232?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.n-n1d2kNyUTRaDpSzlo9sV6vvETFFz4DdzAqqSJGV72yeYYhQTixjpwihHZkUJvvYVhMjr4ouuAigK7A7d9T22eG8pTJkG7dSeW2NVrHyScrFN3_03h6F3YPyiWrvywoZOwEO-QRnfY1y-bayGJZtoOeF7qZN1crY4XSMA5ky9Q.QY_pTQoWSOeor9ylRPgl2cu-39jUc2mP3z_6MBGwn0s&dib_tag=se&keywords=independent+published+audio+book&qid=1794445676&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-232&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 21 },
+    slug: "mail-order-blessing",
+    title: "Mail Order Blessing",
+    author: "Charlotte Dearing",
+    category: "fiction",
+    subgenre: "Novel",
+    description: "A novel by Charlotte Dearing.",
+    cover: cover_mail_order_blessing,
+    href: "https://www.amazon.com/Audible-Mail-Order-Blessing/dp/B0DVJVPN33/ref=sr_1_246?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.o0H6DjE_5XrkA7lQfOpVQ60YHGKFh3q_mlZlUJ9o8wVwAOb2fuY1TRtOJbHxp2-DIcYxMHDZDMF3QTjdvO1yCl7TCKqed9qqlMHI2t2G5waKbl11Cy08YzaNAze6tMlBbNZCygsC1YjVAWVF7khbwMnXvdffnjUsU-chzweyVv4.zw-GEpGLgzQl-GI5ZBJ7PH_hBmBkZv6cvsyVb_vC8rk&dib_tag=se&keywords=independent+published+audio+book&qid=1794445703&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-246&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 22 },
+    slug: "elogio-da-loucura",
+    title: "Elogio da Loucura",
+    author: "Erasmo de Roterdã",
+    category: "classics",
+    subgenre: "Classic satire (Portuguese)",
+    description: "Erasmus’s classic of satire, wisdom and human folly, in Portuguese.",
+    cover: cover_elogio_da_loucura,
+    href: "https://www.amazon.com/dp/B0HR8H1KQD/ref=tmm_aud_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.o0H6DjE_5XrkA7lQfOpVQ60YHGKFh3q_mlZlUJ9o8wVwAOb2fuY1TRtOJbHxp2-DIcYxMHDZDMF3QTjdvO1yCl7TCKqed9qqlMHI2t2G5waKbl11Cy08YzaNAze6tMlBbNZCygsC1YjVAWVF7khbwMnXvdffnjUsU-chzweyVv4.zw-GEpGLgzQl-GI5ZBJ7PH_hBmBkZv6cvsyVb_vC8rk&qid=1794445703&sr=8-248",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 23 },
+    slug: "pack-position",
+    title: "Pack Position",
+    author: "Ella Hartwell",
+    category: "romance",
+    subgenre: "Shifter romance",
+    description: "A reverse harem shifter romance.",
+    cover: cover_pack_position,
+    href: "https://www.amazon.com/Pack-Position-Reverse-Shifter-Romance/dp/B0H24R5K3R/ref=sr_1_249?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.o0H6DjE_5XrkA7lQfOpVQ60YHGKFh3q_mlZlUJ9o8wVwAOb2fuY1TRtOJbHxp2-DIcYxMHDZDMF3QTjdvO1yCl7TCKqed9qqlMHI2t2G5waKbl11Cy08YzaNAze6tMlBbNZCygsC1YjVAWVF7khbwMnXvdffnjUsU-chzweyVv4.zw-GEpGLgzQl-GI5ZBJ7PH_hBmBkZv6cvsyVb_vC8rk&dib_tag=se&keywords=independent+published+audio+book&qid=1794445703&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-249&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 24 },
+    slug: "his-curvy-christmas-treat",
+    title: "His Curvy Christmas Treat",
+    author: "Sadie King",
+    category: "romance",
+    subgenre: "Holiday romance",
+    description: "A Christmas romance.",
+    cover: cover_his_curvy_christmas_treat,
+    href: "https://www.amazon.com/His-Curvy-Christmas-Treat-Romance/dp/B0DNDHF7DN/ref=sr_1_250?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.o0H6DjE_5XrkA7lQfOpVQ60YHGKFh3q_mlZlUJ9o8wVwAOb2fuY1TRtOJbHxp2-DIcYxMHDZDMF3QTjdvO1yCl7TCKqed9qqlMHI2t2G5waKbl11Cy08YzaNAze6tMlBbNZCygsC1YjVAWVF7khbwMnXvdffnjUsU-chzweyVv4.zw-GEpGLgzQl-GI5ZBJ7PH_hBmBkZv6cvsyVb_vC8rk&dib_tag=se&keywords=independent+published+audio+book&qid=1794445703&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-250&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 25 },
+    slug: "fake-dating-my-baby-daddy",
+    title: "Fake Dating My Baby Daddy",
+    author: "Josie Hart",
+    category: "romance",
+    subgenre: "Fake-dating romance",
+    description: "A fake-dating pregnancy romance.",
+    cover: cover_fake_dating_my_baby_daddy,
+    href: "https://www.amazon.com/Fake-Dating-Baby-Daddy-Pregnancy/dp/B0CQ31NQ8C/ref=sr_1_252?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.o0H6DjE_5XrkA7lQfOpVQ60YHGKFh3q_mlZlUJ9o8wVwAOb2fuY1TRtOJbHxp2-DIcYxMHDZDMF3QTjdvO1yCl7TCKqed9qqlMHI2t2G5waKbl11Cy08YzaNAze6tMlBbNZCygsC1YjVAWVF7khbwMnXvdffnjUsU-chzweyVv4.zw-GEpGLgzQl-GI5ZBJ7PH_hBmBkZv6cvsyVb_vC8rk&dib_tag=se&keywords=independent+published+audio+book&qid=1794445703&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-252&xpid=kiYnGkxs1cO6l",
+  },
+  {
+    source: { document: "Book 12.docx", entry: 26 },
+    slug: "breakaway",
+    title: "Breakaway",
+    author: "Chris Savage",
+    category: "romance",
+    subgenre: "Sports romance",
+    description: "An MM hockey romance, a Power Play novel.",
+    cover: cover_breakaway,
+    href: "https://www.amazon.com/BREAKAWAY-A-MM-HOCKEY-ROMANCE/dp/B0GV4XTD3P/ref=sr_1_256?crid=CY778FGSA4NQ&dib=eyJ2IjoiMSJ9.o0H6DjE_5XrkA7lQfOpVQ60YHGKFh3q_mlZlUJ9o8wVwAOb2fuY1TRtOJbHxp2-DIcYxMHDZDMF3QTjdvO1yCl7TCKqed9qqlMHI2t2G5waKbl11Cy08YzaNAze6tMlBbNZCygsC1YjVAWVF7khbwMnXvdffnjUsU-chzweyVv4.zw-GEpGLgzQl-GI5ZBJ7PH_hBmBkZv6cvsyVb_vC8rk&dib_tag=se&keywords=independent+published+audio+book&qid=1794445703&sprefix=Indepented+Published+Audio+book%2Caps%2C361&sr=8-256&xpid=kiYnGkxs1cO6l",
+  },
+];
