@@ -110,10 +110,16 @@ export function DesktopNav() {
                 className={cn(
                   "mt-3! rounded-md! border border-border bg-white p-0! shadow-none! ring-0!",
                   // Wide menus open leftward so they never run past the viewport edge.
-                  item.title === "Services" && "md:right-0 md:left-auto",
+                  (item.title === "Services" || item.title === "Studios") && "md:right-0 md:left-auto",
                 )}
               >
-                {item.title === "Services" ? <ServicesMenu item={item} /> : <CatalogMenu item={item} />}
+                {item.title === "Services" ? (
+                  <ServicesMenu item={item} />
+                ) : item.title === "Studios" ? (
+                  <StudiosMenu item={item} />
+                ) : (
+                  <CatalogMenu item={item} />
+                )}
               </NavigationMenuContent>
             </NavigationMenuItem>
           );
@@ -174,6 +180,26 @@ function ServicesMenu({ item }: { item: NavItem }) {
     <div className="flex w-[42rem]">
       <MenuIntro item={item} />
       <ul className="grid flex-1 grid-cols-2 gap-1 p-4">
+        {item.children?.map((child) => (
+          <li key={child.href}>
+            <NavigationMenuLink asChild className="block rounded-md px-3 py-2.5 hover:bg-white hover:text-brand focus:bg-white focus:text-brand">
+              <Link href={child.href}>
+                <span className="block text-sm font-semibold text-ink">{child.title}</span>
+                <span className="mt-0.5 block text-[0.8125rem] leading-snug text-muted-foreground">{child.description}</span>
+              </Link>
+            </NavigationMenuLink>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function StudiosMenu({ item }: { item: NavItem }) {
+  return (
+    <div className="flex w-[36rem]">
+      <MenuIntro item={item} />
+      <ul className="flex-1 space-y-1 p-4">
         {item.children?.map((child) => (
           <li key={child.href}>
             <NavigationMenuLink asChild className="block rounded-md px-3 py-2.5 hover:bg-white hover:text-brand focus:bg-white focus:text-brand">

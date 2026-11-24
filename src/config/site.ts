@@ -1,7 +1,7 @@
 /**
  * Site-wide configuration: brand details, navigation and footer links.
  * Every route linked here exists: "/", "/about", "/audiobooks" (and its genre pages), "/services" and the six /services/*
- * pages, "/publishers", "/libraries-retailers", "/contact", "/faqs", "/search", "/privacy-policy" and "/terms-conditions".
+ * pages, "/studios" and its two location pages (/studios/new-york, /studios/texas), "/publishers", "/libraries-retailers", "/contact", "/faqs", "/search", "/privacy-policy" and "/terms-conditions".
  */
 
 export type NavChild = {
@@ -41,6 +41,9 @@ export const siteConfig = {
     "Book Stream connects publishers, libraries, retailers and listeners with a smarter, more connected audiobook experience.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   locale: "en_US",
+  /** General contact email, shown in the top strip, on /contact and on the studio pages. */
+  email: "hello@bookstream.com",
+  emailHref: "mailto:hello@bookstream.com",
 } as const;
 
 export const mainNav: NavItem[] = [
@@ -71,6 +74,15 @@ export const mainNav: NavItem[] = [
       { title: "Content Discovery", href: "/services/discovery", description: "Curation that connects titles with audiences." },
     ],
   },
+  {
+    title: "Studios",
+    href: "/studios",
+    summary: "Audiobook recording studios in New York and Texas.",
+    children: [
+      { title: "New York", href: "/studios/new-york", description: "Audiobook narration, recording and editing." },
+      { title: "Texas", href: "/studios/texas", description: "Audiobook narration, recording and editing." },
+    ],
+  },
   { title: "Publishers", href: "/publishers" },
   { title: "About Us", href: "/about" },
 ];
@@ -81,6 +93,7 @@ export const footerNav: FooterGroup[] = [
     links: [
       { title: "About Us", href: "/about" },
       { title: "Services", href: "/services" },
+      { title: "Studios", href: "/studios" },
       { title: "Contact", href: "/contact" },
       { title: "FAQs", href: "/faqs" },
     ],

@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
       /* Legal pages live at /privacy-policy and /terms-conditions; the short paths were linked before they existed. */
       { source: "/privacy", destination: "/privacy-policy", permanent: true },
       { source: "/terms", destination: "/terms-conditions", permanent: true },
+      /* The Atlanta studio page is now the Texas studio page; the Mexico City page was removed. */
+      { source: "/studios/atlanta", destination: "/studios/texas", permanent: true },
+      { source: "/studios/mexico-city", destination: "/studios", permanent: true },
     ];
   },
   turbopack: {

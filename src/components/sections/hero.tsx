@@ -4,91 +4,78 @@ import { ArrowRight } from "lucide-react";
 
 import { hero } from "@/content/home";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/home/hero-magic-of-reading.jpg";
+import heroImage from "@/assets/home/hero-book-stack.png";
 
 /**
- * Editorial homepage hero: one dark, full-width, full-viewport-height scene built around the glowing open-book artwork.
+ * Editorial homepage hero: the book-stack artwork as a full-section background, softened by a white overlay (the
+ * overlay lightens the image only; the copy and buttons sit above it at full opacity), with the copy centred
+ * horizontally and vertically on top.
  *
- * The section background (#070512) is sampled from the artwork's near-black navy, and the artwork's edges are
- * dissolved into it with masks (`hero-scene-mask`), so there is no visible image boundary. This dark band is a
- * deliberate exception to the otherwise white site.
+ * Height: fills the viewport below the sticky header (mobile: 4.5rem + 1px border; lg+: utility bar 2.25rem + header
+ * 5rem + 1px). It is a min-height, so on short or narrow screens the section grows with its content instead of
+ * clipping it.
  *
- * Desktop: copy on the left, vertically centred; the artwork fills the section height on the right.
- * Mobile: copy first, then the artwork full-bleed beneath it on the same background. The section uses a min-height
- * (100svh), so on small screens it grows with its content instead of clipping it.
+ * The overlay is a touch stronger below lg (85%), where the centred copy sits directly over the dark book spines.
  *
- * The artwork is never stretched (its aspect ratio comes from the image file itself), so the book, the light and the
- * bookmark always stay in view. Static by design: no animation or parallax.
+ * The background uses object-cover, anchored towards the book stack (x 80%) so the books stay in frame when narrow
+ * screens crop the image's sides. Static by design: no animation.
  */
 export function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative isolate flex min-h-svh flex-col overflow-hidden bg-[#070512] text-white"
+      className="relative isolate flex min-h-[calc(100svh-4.5rem-1px)] items-center overflow-hidden bg-white text-ink lg:min-h-[calc(100svh-7.25rem-1px)]"
     >
-      <div className="container-page relative z-10 flex flex-1 flex-col justify-center pt-14 sm:pt-20 lg:py-24">
-        <div className="max-w-xl lg:max-w-[30rem] xl:max-w-[34rem]">
-          <p className="eyebrow flex items-center gap-3 text-brand-soft">
-            <span aria-hidden className="h-px w-8 bg-brand-soft" />
-            {hero.eyebrow}
-          </p>
-
-          <h1
-            id="hero-heading"
-            className="mt-7 font-serif text-[2.5rem] leading-[1.08] font-semibold tracking-[-0.025em] text-white sm:text-[3.25rem] lg:text-[3.5rem] xl:text-[4rem]"
-          >
-            <span className="block">{hero.title.lead}</span>
-            <span className="block font-normal text-white/75 italic">
-              {hero.title.emphasis}
-            </span>
-          </h1>
-
-          <p className="mt-7 max-w-[32rem] text-base leading-[1.75] text-white/70 sm:text-lg">
-            {hero.description}
-          </p>
-
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Button
-              asChild
-              size="xl"
-              className="hover:bg-brand-strong focus-visible:ring-white/50"
-            >
-              <Link href={hero.primaryCta.href}>
-                {hero.primaryCta.label}
-                <ArrowRight data-icon="inline-end" className="size-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="xl"
-              variant="outline-inverse"
-              className="focus-visible:ring-white/50"
-            >
-              <Link href={hero.secondaryCta.href}>
-                {hero.secondaryCta.label}
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/*
-        The artwork. Mobile: full-bleed below the copy. Desktop: full section height, anchored to the right edge of the
-        page container (or the viewport on narrower screens), at its native aspect ratio.
-      */}
-      <div
-        className="hero-scene-mask relative mx-auto -mt-2 w-full max-w-[30rem] shrink-0 sm:-mt-6 lg:absolute lg:inset-y-0 lg:right-[max(0px,calc((100vw-82rem)/2))] lg:mt-0 lg:h-full lg:w-auto lg:max-w-none"
-        style={{ aspectRatio: `${heroImage.width} / ${heroImage.height}` }}
-      >
+      {/* Background artwork + white overlay (decorative layering; the image keeps its alt text). */}
+      <div className="absolute inset-0 -z-10">
         <Image
           src={heroImage}
           alt={hero.imageAlt}
           fill
           preload
           placeholder="blur"
-          sizes="(min-width: 1024px) 60vw, (min-width: 480px) 480px, 100vw"
-          className="object-contain"
+          sizes="100vw"
+          className="object-cover object-[80%_50%]"
         />
+        <div aria-hidden className="absolute inset-0 bg-white/85 lg:bg-white/80" />
+      </div>
+
+      <div className="container-page py-16 sm:py-20 lg:py-16">
+        <div className="mx-auto max-w-4xl text-center">
+          <p className="eyebrow flex items-center justify-center gap-3 text-brand">
+            <span aria-hidden className="hidden h-px w-8 shrink-0 bg-brand sm:block" />
+            {hero.eyebrow}
+            <span aria-hidden className="hidden h-px w-8 shrink-0 bg-brand sm:block" />
+          </p>
+
+          <h1
+            id="hero-heading"
+            className="mt-7 font-serif text-[2.75rem] leading-[1.05] font-semibold tracking-[-0.025em] text-ink sm:text-[3.75rem] lg:text-[4.5rem] xl:text-[5.25rem]"
+          >
+            <span className="block">{hero.title.lead}</span>
+            <span className="block font-normal text-ink/75 italic">
+              {hero.title.emphasis}
+            </span>
+          </h1>
+
+          <p className="mx-auto mt-8 max-w-2xl text-lg leading-[1.7] text-ink/80 sm:text-xl lg:text-[1.375rem]">
+            {hero.description}
+          </p>
+
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row lg:mt-12">
+            <Button asChild size="xl" className="w-full max-w-xs bg-brand hover:bg-brand-strong sm:w-auto">
+              <Link href={hero.primaryCta.href}>
+                {hero.primaryCta.label}
+                <ArrowRight data-icon="inline-end" className="size-4" />
+              </Link>
+            </Button>
+            <Button asChild size="xl" variant="outline" className="w-full max-w-xs sm:w-auto">
+              <Link href={hero.secondaryCta.href}>
+                {hero.secondaryCta.label}
+              </Link>
+            </Button>
+          </div>
+        </div>
       </div>
     </section>
   );

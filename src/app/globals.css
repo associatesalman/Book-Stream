@@ -102,32 +102,6 @@
 }
 
 /*
- * Homepage hero: dissolves the photo's edges into the hero background (sampled from the photo's near-black edges)
- * so the image and section read as one scene. Each gradient fades one side; intersecting them keeps the centre
- * (the open book and the small figure) fully opaque. Masks only, the photo's colours are untouched.
- */
-@layer components {
-  .hero-scene-mask {
-    --fade-l: 12%;
-    --fade-r: 10%;
-    --fade-t: 14%;
-    --fade-b: 5%;
-    mask-image:
-      linear-gradient(to right, transparent, #000 var(--fade-l)),
-      linear-gradient(to left, transparent, #000 var(--fade-r)),
-      linear-gradient(to bottom, transparent, #000 var(--fade-t)),
-      linear-gradient(to top, transparent, #000 var(--fade-b));
-    mask-composite: intersect;
-    -webkit-mask-composite: source-in;
-    @media (width >= 64rem) {
-      --fade-l: 24%;
-      --fade-r: 8%;
-      --fade-t: 12%;
-    }
-  }
-}
-
-/*
  * Services hero (src/components/services/services-hero.tsx): the section background is sampled from the artwork
  * itself (src/assets/services/services-hero-light-path.webp), so the image needs almost no edge treatment.
  * The artwork's navy is a vertical gradient that is slightly lighter on its right edge (glow from the beam), so in the

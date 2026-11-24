@@ -25,7 +25,7 @@ export function ListeningFit() {
         <div className="mt-12 grid items-center gap-x-10 gap-y-12 md:grid-cols-2 lg:mt-16 lg:grid-cols-[1fr_minmax(0,25rem)_1fr] lg:gap-x-12 xl:grid-cols-[1fr_minmax(0,27rem)_1fr]">
           {/* Illustration: first on mobile/tablet, centre column on desktop */}
           <div className="mx-auto w-full max-w-[22rem] sm:max-w-[25rem] md:col-span-2 lg:order-2 lg:col-span-1 lg:max-w-none">
-            <div className="relative aspect-[2/3] w-full">
+            <div className="relative w-full" style={{ aspectRatio: `${image.width} / ${image.height}` }}>
               <Image
                 src={image.src}
                 alt={image.alt}

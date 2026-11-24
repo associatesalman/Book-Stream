@@ -6,6 +6,13 @@ import { getBooks } from "@/content/catalog";
 import { pageMetadata } from "@/lib/page-metadata";
 import { BookSection, CatalogHeader, SearchSummary } from "@/components/catalog/catalog-sections";
 
+/**
+ * Every slug is prerendered (generateStaticParams), so the page is static. It reads `params` at the top level, so
+ * client navigations wait for the prerendered page rather than showing a placeholder shell first.
+ * https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config/instant
+ */
+export const instant = false;
+
 export function generateStaticParams() {
   return audiobookCategories.map((c) => ({ slug: c.slug }));
 }

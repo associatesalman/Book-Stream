@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { Mail } from "lucide-react";
+
+import { siteConfig } from "@/config/site";
 
 import { contactSeo, nextSteps } from "@/content/contact";
 import { pageMetadata } from "@/lib/page-metadata";
@@ -22,6 +25,17 @@ export default function ContactPage() {
                 title="Tell us about your project"
                 description="Only four fields are required. Further questions appear when they’re relevant to the services you choose."
               />
+              <div className="mt-8 rounded-[4px] border border-border p-5">
+                <h2 className="text-sm font-semibold text-ink">Prefer email?</h2>
+                <p className="mt-1 text-[0.9375rem] leading-relaxed text-ink/70">Write to us directly at</p>
+                <a
+                  href={siteConfig.emailHref}
+                  className="mt-2 inline-flex items-center gap-2 text-base font-semibold break-all text-brand underline underline-offset-4 hover:text-ink"
+                >
+                  <Mail className="size-4 shrink-0" aria-hidden />
+                  {siteConfig.email}
+                </a>
+              </div>
               <h2 className="mt-10 text-sm font-semibold text-ink">What happens next</h2>
               <ol className="mt-4 space-y-4">
                 {nextSteps.map((step, i) => (

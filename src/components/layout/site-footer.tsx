@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { cacheLife } from "next/cache";
 
-import { footerNav, legalNav, siteConfig, socialLinks } from "@/config/site";
+import { footerNav, legalNav, siteConfig } from "@/config/site";
 import { Logo } from "@/components/brand/logo";
-import { SocialIcon } from "@/components/shared/social-icon";
 
 /** Current year, cached so the footer stays part of the prerendered static shell. */
 async function CopyrightYear() {
@@ -28,33 +27,6 @@ export function SiteFooter() {
           <div className="lg:col-span-4 lg:pr-10">
             <Logo variant="transparent" />
             <p className="mt-6 max-w-sm text-[0.9375rem] leading-relaxed text-ink/65">{siteConfig.description}</p>
-
-            <ul className="mt-8 flex items-center gap-2" aria-label="Social media">
-              {socialLinks.map((social) => (
-                <li key={social.platform}>
-                  {social.href ? (
-                    <a
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Book Stream on ${social.label}`}
-                      className="flex size-10 items-center justify-center rounded-md border border-ink/15 text-ink/75 hover:border-brand hover:bg-brand hover:text-white"
-                    >
-                      <SocialIcon platform={social.platform} className="size-[1.125rem]" />
-                    </a>
-                  ) : (
-                    // Profile URL not confirmed yet — shown as a non-interactive placeholder.
-                    <span
-                      title={`${social.label} — coming soon`}
-                      className="flex size-10 cursor-default items-center justify-center rounded-md border border-ink/10 text-ink/40"
-                    >
-                      <SocialIcon platform={social.platform} className="size-[1.125rem]" />
-                      <span className="sr-only">{social.label} profile coming soon</span>
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
           </div>
 
           <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-8">

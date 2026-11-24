@@ -36,12 +36,11 @@ export const hero = {
   primaryCta: { label: "Explore Audiobooks", href: "/audiobooks" },
   secondaryCta: { label: "Discover Book Stream", href: "/about" },
   /**
-   * Supplied artwork (public/home page/hero-image.jpg, a framed "Magic of Reading" poster on a wooden table). Only the
-   * dark artwork is used: the wood, the white mat and the printed caption are cropped off, saved as
-   * src/assets/home/hero-magic-of-reading.jpg and statically imported (content-hashed URL, so no stale cache).
+   * Supplied artwork (public/home page/new-home.png: white space on the left, a book stack with pen and compass on the
+   * right), copied unchanged to src/assets/home/hero-book-stack.png and statically imported (content-hashed URL).
    */
   imageAlt:
-    "An open book with a ribbon bookmark, a soft beam of blue light rising from its pages into the dark",
+    "A stack of hardback books titled Idea, Craft, Strategy, Publish and Legacy, with a fountain pen on top and a brass compass beside them",
 };
 
 /* ------------------------------------------------------------- Audiences */
@@ -171,10 +170,15 @@ export const listeningFit = {
   heading: "Find the Right Fit for Your Listening Life",
   description:
     "Your next great listen starts with knowing what matters to you. Explore your interests, compare listening options, and choose an experience that fits your everyday routine.",
-  /** Supplied illustration (public/home page/mokcup 2 section5.png), copied here with a URL-safe name. */
+  /**
+   * Supplied illustration (public/home page/mokcup 2 section5.png, 1025 × 1535; replaced 2026-11-18), copied here
+   * with a URL-safe name. A new filename, so no cached copy of the previous illustration is served.
+   */
   image: {
-    src: "/images/home/listening-fit-illustration.png",
-    alt: "Illustration titled “What audiobook platform is right for you?” showing a woman in a green sweater listening on headphones, surrounded by leaves and flowers",
+    src: "/images/home/listening-fit-headphones.png",
+    width: 1025,
+    height: 1535,
+    alt: "Poster reading “What audiobook platform is right for you?” in bold navy type, with blue and gold headphones resting over the words “audio book”",
   },
   steps: [
     {
@@ -197,8 +201,8 @@ export const listeningFit = {
         "Explore Book Stream’s collection and follow each title’s link to learn more on its listed platform.",
     },
   ] satisfies ListeningStep[],
-  /** Scrolls to the audiobook collection section on the homepage. */
-  cta: { label: "Explore Audiobooks", href: "#audiobooks" },
+  /** Opens the full audiobook catalogue (src/app/audiobooks/page.tsx). */
+  cta: { label: "Explore Audiobooks", href: "/audiobooks" },
 };
 
 /* ------------------------------------------------- Stories & voices intro */
